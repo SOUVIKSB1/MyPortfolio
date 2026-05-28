@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Mail, ExternalLink, Download, Menu, X } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import * as THREE from "three";
+import { motion } from "framer-motion";
+import StartAnimation from "./components/StartAnimation";
 import profileImg from "./assets/hero.png";
 import "./App.css";
 import { Phone } from "lucide-react";
@@ -10,8 +12,9 @@ import { Phone } from "lucide-react";
 /* ═══════════════════════════════════
    THREE.JS  —  3D CONSTELLATION HOOK
 ═══════════════════════════════════ */
-function useThreeConstellation(canvasRef) {
+function useThreeConstellation(canvasRef, shouldRender) {
   useEffect(() => {
+    if (!shouldRender) return;
     if (window.innerWidth <= 768) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -177,7 +180,7 @@ function useThreeConstellation(canvasRef) {
 
     // Global drag interactions (ignoring buttons, inputs, links, navbar elements)
     const handleMouseDown = (e) => {
-      if (e.target.closest("a, button, input, textarea, .project-card, .service-card, .stat-card, .skills-category, .profile-card, nav")) return;
+      if (e.target.closest("a, button, input, textarea, .project-card, .service-card, .cert-card, .stat-card, .skills-category, .profile-card, nav")) return;
       onDown(e.clientX, e.clientY);
     };
 
@@ -186,7 +189,7 @@ function useThreeConstellation(canvasRef) {
     };
 
     const handleTouchStart = (e) => {
-      if (e.target.closest("a, button, input, textarea, .project-card, .service-card, .stat-card, .skills-category, .profile-card, nav")) return;
+      if (e.target.closest("a, button, input, textarea, .project-card, .service-card, .cert-card, .stat-card, .skills-category, .profile-card, nav")) return;
       onDown(e.touches[0].clientX, e.touches[0].clientY);
     };
 
@@ -332,14 +335,15 @@ function useThreeConstellation(canvasRef) {
       window.removeEventListener("touchend", onUp);
       renderer.dispose();
     };
-  }, [canvasRef]);
+  }, [canvasRef, shouldRender]);
 }
 
 /* ═══════════════════════════════════
    SCROLL REVEAL HOOK
 ═══════════════════════════════════ */
-function useScrollReveal() {
+function useScrollReveal(shouldRender) {
   useEffect(() => {
+    if (!shouldRender) return;
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -352,15 +356,163 @@ function useScrollReveal() {
     );
     document.querySelectorAll(".reveal, .reveal-title, .reveal-text, .reveal-scale, .reveal-fade-up").forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, []);
+  }, [shouldRender]);
 }
 
 /* ═══════════════════════════════════
    APP COMPONENT
 ═══════════════════════════════════ */
 export default function App() {
+  const [loading, setLoading] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Certifications list
+  const certifications = [
+    {
+      title: "Associate Cloud Engineer Certificate",
+      issuer: "Google Cloud Training",
+      date: "Oct 2024",
+      id: "GCP-ACE-82910",
+      link: "https://www.cloudskillsboost.google/",
+      icon: "☁️"
+    },
+    {
+      title: "Docker & Kubernetes Specialist Certification",
+      issuer: "KodeKloud / Linux Foundation",
+      date: "July 2024",
+      id: "DK-KUBE-47209",
+      link: "https://kodekloud.com/",
+      icon: "🐳"
+    },
+    {
+      title: "Full-Stack Web Developer Certificate",
+      issuer: "Techno Main / SIH Academy",
+      date: "Dec 2023",
+      id: "FS-WEB-90812",
+      link: "https://github.com/SOUVIKSB1",
+      icon: "💻"
+    }
+  ];
+
+  // Default reviews
+  const defaultReviews = [
+    {
+      name: "Aman Gupta",
+      role: "SIH Finalist Team Lead",
+      rating: 5,
+      comment: "Souvik's cloud architecture setup was flawless. He deployed our Kubernetes nodes and Vertex AI services within hours during the hackathon!",
+      date: "Apr 2025"
+    },
+    {
+      name: "Dr. R. Sen",
+      role: "CSE Professor at Techno Main",
+      rating: 5,
+      comment: "An exceptionally diligent student. Souvik bridges Frontend and Cloud DevOps with standard design tokens and clean structure.",
+      date: "Jan 2026"
+    },
+    {
+      name: "Vikram Malhotra",
+      role: "Open-source Collaborator",
+      rating: 4,
+      comment: "Great attention to visual styles. The hacker loading animation transition and full-bleed carousels make this portfolio state-of-the-art.",
+      date: "May 2026"
+    }
+  ];
+
+  const [reviews, setReviews] = useState(() => {
+    const saved = localStorage.getItem("portfolio_reviews");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return defaultReviews;
+  });
+
+  const [newReviewName, setNewReviewName] = useState("");
+  const [newReviewRole, setNewReviewRole] = useState("");
+  const [newReviewRating, setNewReviewRating] = useState(5);
+  const [newReviewComment, setNewReviewComment] = useState("");
+  const [hoverRating, setHoverRating] = useState(0);
+
+  const handleAddReview = (e) => {
+    e.preventDefault();
+    if (!newReviewName.trim() || !newReviewComment.trim()) return;
+
+    const newRev = {
+      name: newReviewName,
+      role: newReviewRole.trim() || "Visitor",
+      rating: newReviewRating,
+      comment: newReviewComment,
+      date: new Date().toLocaleDateString([], { month: "short", year: "numeric" })
+    };
+
+    const updated = [newRev, ...reviews];
+    setReviews(updated);
+    localStorage.setItem("portfolio_reviews", JSON.stringify(updated));
+
+    // Reset form
+    setNewReviewName("");
+    setNewReviewRole("");
+    setNewReviewRating(5);
+    setNewReviewComment("");
+  };
+
+  const renderStarsSelector = () => {
+    return (
+      <div className="stars-selector">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <button
+            key={star}
+            type="button"
+            className={`star-btn ${star <= (hoverRating || newReviewRating) ? "active" : ""}`}
+            onClick={() => setNewReviewRating(star)}
+            onMouseEnter={() => setHoverRating(star)}
+            onMouseLeave={() => setHoverRating(0)}
+            aria-label={`Rate ${star} Stars`}
+          >
+            ★
+          </button>
+        ))}
+      </div>
+    );
+  };
+
+  const renderStars = (count) => {
+    return (
+      <div className="stars-display">
+        {Array.from({ length: 5 }, (_, i) => (
+          <span key={i} className={`star ${i < count ? "filled" : ""}`}>
+            ★
+          </span>
+        ))}
+      </div>
+    );
+  };
+
+  const handleStartExit = useCallback(() => {
+    setIsExiting(true);
+  }, []);
+
+  const handleComplete = useCallback(() => {
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (loading && !isExiting) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loading, isExiting]);
   const [imageError, setImageError] = useState(false);
   const [cardTransform, setCardTransform] = useState("rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)");
   const [typingText, setTypingText] = useState("");
@@ -378,8 +530,10 @@ export default function App() {
   const canvasRef = useRef(null);
   const cardWrapperRef = useRef(null);
 
-  useThreeConstellation(canvasRef);
-  useScrollReveal();
+  const shouldRenderMain = isExiting || !loading;
+
+  useThreeConstellation(canvasRef, shouldRenderMain);
+  useScrollReveal(shouldRenderMain);
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 768px)");
@@ -426,6 +580,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (!shouldRenderMain) return;
     const shimmerCards = document.querySelectorAll(".stat-card, .skills-category");
     
     const handleMouseMove = (e) => {
@@ -454,7 +609,7 @@ export default function App() {
         card.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, []);
+  }, [shouldRenderMain]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -598,7 +753,8 @@ export default function App() {
   };
 
   useEffect(() => {
-    const cards = document.querySelectorAll(".project-card, .service-card");
+    if (!shouldRenderMain) return;
+    const cards = document.querySelectorAll(".project-card, .service-card, .cert-card");
     
     const handleMouseMove = (e) => {
       const card = e.currentTarget;
@@ -631,26 +787,42 @@ export default function App() {
         card.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, []);
+  }, [shouldRenderMain]);
 
   return (
-    <div>
-      {/* Grain overlay */}
-      <div className="grain" />
+    <>
+      {loading && (
+        <StartAnimation 
+          onStartExit={handleStartExit} 
+          onComplete={handleComplete} 
+        />
+      )}
 
-      {/* 3D Canvas Background */}
-      <canvas ref={canvasRef} id="canvas-3d" />
+      {(isExiting || !loading) && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ width: "100%", minHeight: "100vh", position: "relative", overflowX: "hidden" }}
+        >
+        {/* Grain overlay */}
+        <div className="grain" />
+
+        {/* 3D Canvas Background */}
+        <canvas ref={canvasRef} id="canvas-3d" />
 
       {/* ── NAVBAR ── */}
       <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
         <div className="logo">&lt; Souvik ./ &gt;</div>
         <ul className={`nav-links${menuOpen ? " active" : ""}`}>
-          <li><a href="#home"       onClick={() => setMenuOpen(false)}>RETURN (0)</a></li>
-          <li><a href="#about"      onClick={() => setMenuOpen(false)}>PRINTF()</a></li>
-          <li><a href="#services"   onClick={() => setMenuOpen(false)}>FUNCTION()</a></li>
-          <li><a href="#projects"   onClick={() => setMenuOpen(false)}>BUILD()</a></li>
-          <li><a href="#experience" onClick={() => setMenuOpen(false)}>WHILE (LEARNING)</a></li>
-          <li><a href="#contact"    onClick={() => setMenuOpen(false)}>PING()</a></li>
+          <li><a href="#home"           onClick={() => setMenuOpen(false)}>RETURN (0)</a></li>
+          <li><a href="#about"          onClick={() => setMenuOpen(false)}>PRINTF()</a></li>
+          <li><a href="#services"       onClick={() => setMenuOpen(false)}>FUNCTION()</a></li>
+          <li><a href="#projects"       onClick={() => setMenuOpen(false)}>BUILD()</a></li>
+          <li><a href="#experience"     onClick={() => setMenuOpen(false)}>WHILE (LEARNING)</a></li>
+          <li><a href="#certifications" onClick={() => setMenuOpen(false)}>CERTIFICATE()</a></li>
+          <li><a href="#feedback"       onClick={() => setMenuOpen(false)}>FEEDBACK()</a></li>
+          <li><a href="#contact"        onClick={() => setMenuOpen(false)}>PING()</a></li>
         </ul>
         <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -1016,6 +1188,137 @@ export default function App() {
 
       <div className="divider" />
 
+      {/* ── CERTIFICATIONS ── */}
+      <section className="certifications-section" id="certifications">
+        <div className="ambient-glow glow-1" />
+        <div className="section-label reveal-fade-up" style={{ justifyContent: "center" }}>Credentials</div>
+        <h2 className="section-title reveal-title" style={{ textAlign: "center" }}>
+          Professional <span className="gradient-text">Certifications</span>
+        </h2>
+
+        <div className="cert-grid">
+          {certifications.map((c, i) => (
+            <div className={`cert-card reveal-scale delay-${(i % 3) + 1}`} key={c.title}>
+              <div className="cert-header">
+                <span className="cert-icon">{c.icon}</span>
+                <span className="cert-date">{c.date}</span>
+              </div>
+              <h3>{c.title}</h3>
+              <p className="cert-issuer">{c.issuer}</p>
+              <div className="cert-footer">
+                <span className="cert-id">ID: {c.id}</span>
+                <a href={c.link} target="_blank" rel="noreferrer" className="cert-link-btn">
+                  Verify <ExternalLink size={12} />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="divider" />
+
+      {/* ── FEEDBACK & RATING ── */}
+      <section className="feedback-section" id="feedback">
+        <div className="ambient-glow glow-2" />
+        <div className="section-label reveal-fade-up" style={{ justifyContent: "center" }}>Reviews</div>
+        <h2 className="section-title reveal-title" style={{ textAlign: "center" }}>
+          Community <span className="gradient-text">Feedback</span>
+        </h2>
+
+        <div className="feedback-container reveal-fade-up delay-2">
+          {/* Left: Feedback Form */}
+          <div className="feedback-form-box">
+            <h3>Submit Your Review</h3>
+            <p>Your feedback is stored locally and displayed in real-time.</p>
+            <form onSubmit={handleAddReview} className="feedback-form">
+              <div className="form-group">
+                <label htmlFor="rev-name">Name *</label>
+                <input
+                  id="rev-name"
+                  type="text"
+                  placeholder="e.g., Sourav Ganguly"
+                  value={newReviewName}
+                  onChange={(e) => setNewReviewName(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="rev-role">Role / Company</label>
+                <input
+                  id="rev-role"
+                  type="text"
+                  placeholder="e.g., Lead Engineer at Meta"
+                  value={newReviewRole}
+                  onChange={(e) => setNewReviewRole(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Rating *</label>
+                {renderStarsSelector()}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="rev-comment">Message *</label>
+                <textarea
+                  id="rev-comment"
+                  placeholder="Share your thoughts about my work, projects, or SIH team experience..."
+                  value={newReviewComment}
+                  onChange={(e) => setNewReviewComment(e.target.value)}
+                  rows="4"
+                  required
+                />
+              </div>
+
+              <button type="submit" className="primary-btn submit-rev-btn">
+                Submit Review
+              </button>
+            </form>
+          </div>
+
+          {/* Right: Aggregate Score & Testimonials List */}
+          <div className="feedback-display-box">
+            {/* Aggregate Metric Widget */}
+            <div className="rating-metrics-card">
+              <div className="metrics-left">
+                <h4>{(reviews.reduce((acc, curr) => acc + curr.rating, 0) / (reviews.length || 1)).toFixed(1)}</h4>
+                <div className="metrics-stars">
+                  {renderStars(Math.round(reviews.reduce((acc, curr) => acc + curr.rating, 0) / (reviews.length || 1)))}
+                  <span>({reviews.length} reviews)</span>
+                </div>
+              </div>
+              <div className="metrics-right">
+                <div className="metric-glow-ring" />
+                <span className="live-status">LIVE FEED</span>
+              </div>
+            </div>
+
+            {/* Testimonials List */}
+            <div className="testimonials-list">
+              {reviews.map((r, index) => (
+                <div className="testi-card" key={index}>
+                  <div className="testi-header">
+                    <div>
+                      <h5>{r.name}</h5>
+                      <span className="testi-role">{r.role}</span>
+                    </div>
+                    <span className="testi-date">{r.date}</span>
+                  </div>
+                  <div className="testi-rating">
+                    {renderStars(r.rating)}
+                  </div>
+                  <p className="testi-comment">"{r.comment}"</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" />
+
       {/* ── CONTACT ── */}
       <section className="contact-section" id="contact">
         <div className="section-label reveal-fade-up" style={{ justifyContent: "center" }}>Contact</div>
@@ -1029,15 +1332,16 @@ export default function App() {
               Interested in collaborating, discussing tech, or exploring new opportunities?
               My inbox is always open.
             </p>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=souviksinhababu1@gmail.com" className="primary-btn" style={{ margin: "0 auto" }} target="_blank" rel="noreferrer">
-              <Mail size={16} />
-              sayHello()
-            </a>
-            <a>           </a>
-          <a href="tel:+918250204087" className="primary-btn" style={{ margin: "0 auto" }}>
-            <Phone size={16} />
-            initCall()
-          </a>
+            <div className="contact-buttons">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=souviksinhababu1@gmail.com" className="primary-btn" target="_blank" rel="noreferrer">
+                <Mail size={16} />
+                sayHello()
+              </a>
+              <a href="tel:+918250204087" className="primary-btn">
+                <Phone size={16} />
+                initCall()
+              </a>
+            </div>
 
           </div>
         </div>
@@ -1048,6 +1352,8 @@ export default function App() {
         <span className="logo-sm">&lt; Souvik ./ &gt;</span>
         <span>© 2026 Souvik Sinhababu · Built with React &amp; Vite</span>
       </footer>
-    </div>
+    </motion.div>
+      )}
+    </>
   );
 }
