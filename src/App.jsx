@@ -438,28 +438,83 @@ export default function App() {
   const [newReviewRating, setNewReviewRating] = useState(5);
   const [newReviewComment, setNewReviewComment] = useState("");
   const [hoverRating, setHoverRating] = useState(0);
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+  const [reviewsError, setReviewsError] = useState(null);
 
-  const handleAddReview = (e) => {
+  // Fetch reviews from the backend on mount
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch('/api/reviews');
+        if (!res.ok) throw new Error('Failed to load reviews');
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setReviews(data);
+          localStorage.setItem("portfolio_reviews", JSON.stringify(data));
+          setReviewsError(null);
+        }
+      } catch (err) {
+        console.error("Error loading reviews from database:", err);
+        setReviewsError("Database offline. Showing offline cached reviews.");
+      }
+    };
+    fetchReviews();
+  }, []);
+
+  const handleAddReview = async (e) => {
     e.preventDefault();
     if (!newReviewName.trim() || !newReviewComment.trim()) return;
 
+    setIsSubmittingReview(true);
     const newRev = {
-      name: newReviewName,
+      name: newReviewName.trim(),
       role: newReviewRole.trim() || "Visitor",
       rating: newReviewRating,
-      comment: newReviewComment,
+      comment: newReviewComment.trim(),
       date: new Date().toLocaleDateString([], { month: "short", year: "numeric" })
     };
 
-    const updated = [newRev, ...reviews];
-    setReviews(updated);
-    localStorage.setItem("portfolio_reviews", JSON.stringify(updated));
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRev)
+      });
 
-    // Reset form
-    setNewReviewName("");
-    setNewReviewRole("");
-    setNewReviewRating(5);
-    setNewReviewComment("");
+      if (!res.ok) {
+        throw new Error('Database submission failed');
+      }
+
+      const savedReview = await res.json();
+      
+      const updated = [savedReview, ...reviews];
+      setReviews(updated);
+      localStorage.setItem("portfolio_reviews", JSON.stringify(updated));
+
+      // Reset form
+      setNewReviewName("");
+      setNewReviewRole("");
+      setNewReviewRating(5);
+      setNewReviewComment("");
+      setReviewsError(null);
+    } catch (err) {
+      console.error("Error submitting review to database:", err);
+      // Resilient local fallback
+      const updated = [newRev, ...reviews];
+      setReviews(updated);
+      localStorage.setItem("portfolio_reviews", JSON.stringify(updated));
+      
+      // Reset form
+      setNewReviewName("");
+      setNewReviewRole("");
+      setNewReviewRating(5);
+      setNewReviewComment("");
+      setReviewsError("Submitted locally. Unable to sync to live database.");
+    } finally {
+      setIsSubmittingReview(false);
+    }
   };
 
   const renderStarsSelector = () => {
@@ -1272,8 +1327,14 @@ export default function App() {
                 />
               </div>
 
-              <button type="submit" className="primary-btn submit-rev-btn">
-                Submit Review
+              {reviewsError && (
+                <p className="reviews-error-msg" style={{ color: 'var(--accent)', fontSize: '11px', marginTop: '5px', textAlign: 'center', fontFamily: 'monospace' }}>
+                  // {reviewsError}
+                </p>
+              )}
+
+              <button type="submit" className="primary-btn submit-rev-btn" disabled={isSubmittingReview}>
+                {isSubmittingReview ? "Submitting..." : "Submit Review"}
               </button>
             </form>
           </div>
