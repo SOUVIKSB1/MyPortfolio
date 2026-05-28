@@ -1211,6 +1211,7 @@ body {
 /* ── CONTACT ── */
 .contact-section {
   text-align: center;
+  padding-top: 180px !important; /* Visual separation from reviews section to resolve background orbit conflict */
 }
 
 .contact-inner {
@@ -2247,6 +2248,10 @@ body {
     padding-top: 60px !important;
     padding-bottom: 60px !important;
   }
+
+  .contact-section {
+    padding-top: 120px !important;
+  }
   
   .section-title {
     font-size: clamp(20px, 5vw, 26px) !important;
@@ -2462,6 +2467,10 @@ body {
   .contact-section {
     padding-top: 48px !important;
     padding-bottom: 48px !important;
+  }
+
+  .contact-section {
+    padding-top: 100px !important;
   }
 
   /* Adjust card wrapper relative to viewport width to prevent horizontal wiggles on 320px screens */
