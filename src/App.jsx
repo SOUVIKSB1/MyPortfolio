@@ -1149,7 +1149,7 @@ export default function App() {
               </svg>
               View Projects
             </a>
-            <a href="../assets/Souvik_Sinhababu CV.pdf" className="secondary-btn">
+            <a href="/Souvik_Sinhababu_CV.pdf" download="Souvik_Sinhababu_CV.pdf" className="secondary-btn">
               <Download size={16} />
               Resume (export.pdf)
             </a>
