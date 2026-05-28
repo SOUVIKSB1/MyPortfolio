@@ -2531,3 +2531,64 @@ body {
     padding: 24px 20px !important;
   }
 }
+
+/* ── CUSTOM CURSOR ── */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.2s ease;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  background-color: transparent;
+  box-shadow: 0 0 4px rgba(249, 115, 22, 0.1);
+}
+
+/* Hover States */
+.cursor-dot.hovered {
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent-blue);
+  box-shadow: 0 0 10px var(--accent-blue);
+}
+
+.cursor-ring.hovered {
+  width: 48px;
+  height: 48px;
+  border-color: var(--accent-blue);
+  background-color: rgba(14, 165, 233, 0.05);
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.2);
+}
+
+/* Hide default cursor on desktop screens */
+@media (pointer: fine) {
+  body, 
+  a, 
+  button, 
+  input, 
+  textarea, 
+  .project-card, 
+  .service-card, 
+  .cert-card, 
+  .stat-card,
+  .see-all-card {
+    cursor: none !important;
+  }
+}

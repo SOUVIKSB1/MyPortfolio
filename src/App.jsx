@@ -361,6 +361,105 @@ function useScrollReveal(shouldRender, certsExpanded, projectsExpanded, services
 
 
 /* ═══════════════════════════════════
+   CUSTOM CURSOR EFFECT COMPONENT
+   Interactive 3D mouse trailing effect
+═══════════════════════════════════ */
+function CustomCursor() {
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let ringX = 0;
+    let ringY = 0;
+    let isHidden = true;
+    let isHovered = false;
+
+    const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (isHidden) {
+        isHidden = false;
+        if (dotRef.current) dotRef.current.style.opacity = "1";
+        if (ringRef.current) ringRef.current.style.opacity = "1";
+      }
+    };
+
+    const onMouseLeave = () => {
+      isHidden = true;
+      if (dotRef.current) dotRef.current.style.opacity = "0";
+      if (ringRef.current) ringRef.current.style.opacity = "0";
+    };
+
+    const onMouseOver = (e) => {
+      const isInteractive = e.target.closest("a, button, input, textarea, [role='button'], .project-card, .service-card, .cert-card, .stat-card, .see-all-card");
+      if (isInteractive) {
+        if (!isHovered) {
+          isHovered = true;
+          if (dotRef.current) dotRef.current.classList.add("hovered");
+          if (ringRef.current) ringRef.current.classList.add("hovered");
+        }
+      } else {
+        if (isHovered) {
+          isHovered = false;
+          if (dotRef.current) dotRef.current.classList.remove("hovered");
+          if (ringRef.current) ringRef.current.classList.remove("hovered");
+        }
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("mouseover", onMouseOver);
+
+    // Initial opacity 0
+    if (dotRef.current) dotRef.current.style.opacity = "0";
+    if (ringRef.current) ringRef.current.style.opacity = "0";
+
+    let rafId;
+    const tick = () => {
+      const dx = mouseX - ringX;
+      const dy = mouseY - ringY;
+      ringX += dx * 0.15;
+      ringY += dy * 0.15;
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate3d(-50%, -50%, 0)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate3d(-50%, -50%, 0)`;
+      }
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("mouseover", onMouseOver);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  if (typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches) {
+    return null;
+  }
+
+  return (
+    <>
+      <div ref={dotRef} className="cursor-dot" />
+      <div ref={ringRef} className="cursor-ring" />
+    </>
+  );
+}
+
+
+/* ═══════════════════════════════════
    COUNTER TICKER COMPONENT
    Counts up from 0 to value when visible
 ═══════════════════════════════════ */
@@ -1099,6 +1198,9 @@ export default function App() {
         >
         {/* Grain overlay */}
         <div className="grain" />
+
+        {/* Custom mouse follower effect */}
+        <CustomCursor />
 
         {/* 3D Canvas Background */}
         <canvas ref={canvasRef} id="canvas-3d" />
