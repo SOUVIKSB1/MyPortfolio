@@ -142,7 +142,7 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 120px 6% 80px;
+  padding: 120px 8% 80px;
   overflow: hidden;
   gap: 48px;
 }
@@ -558,7 +558,7 @@ body {
 .certifications-section,
 .feedback-section,
 .contact-section {
-  padding: 140px 8%;
+  padding: 80px 8%;
   position: relative;
   overflow: hidden; /* Contain full-bleed mobile carousels and prevent horizontal page scrolling */
 }
@@ -1245,7 +1245,7 @@ body {
 
 /* ── FOOTER ── */
 .footer {
-  padding: 28px 6%;
+  padding: 28px 8%;
   border-top: 1px solid rgba(249, 115, 22, 0.08);
   display: flex;
   justify-content: space-between;
@@ -1675,9 +1675,6 @@ body {
 }
 
 /* ── ABOUT GRID & PHILOSOPHY ── */
-.about-section {
-  padding: 80px 8% !important;
-}
 
 .about-grid {
   display: grid;
@@ -2160,6 +2157,7 @@ body {
     flex-direction: column !important;
     gap: 12px !important;
     text-align: center !important;
+    padding: 24px 8% !important;
   }
   .navbar {
     top: 16px !important;
@@ -2226,6 +2224,19 @@ body {
   }
 
   /* Global section compacting */
+  .hero-section,
+  .about-section,
+  .services-section,
+  .projects-section,
+  .experience-section,
+  .certifications-section,
+  .feedback-section,
+  .contact-section,
+  .footer {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
   .about-section,
   .services-section,
   .projects-section,
@@ -2233,7 +2244,8 @@ body {
   .certifications-section,
   .feedback-section,
   .contact-section {
-    padding: 60px 24px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
   }
   
   .section-title {
@@ -2428,6 +2440,19 @@ body {
 
 /* ── ULTRA-MOBILE OVERRIDES (480px) ── */
 @media (max-width: 480px) {
+  .hero-section,
+  .about-section,
+  .services-section,
+  .projects-section,
+  .experience-section,
+  .certifications-section,
+  .feedback-section,
+  .contact-section,
+  .footer {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
   .about-section,
   .services-section,
   .projects-section,
@@ -2435,7 +2460,8 @@ body {
   .certifications-section,
   .feedback-section,
   .contact-section {
-    padding: 48px 16px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
   }
 
   /* Adjust card wrapper relative to viewport width to prevent horizontal wiggles on 320px screens */
