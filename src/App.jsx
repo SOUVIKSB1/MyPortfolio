@@ -1128,14 +1128,14 @@ export default function App() {
         <div className="hero-left">
           <div className="hero-tag reveal">
             <span className="dot" />
-            Available for opportunities
+             Let’s Build Something Great
           </div>
 
           <h1 className="reveal delay-1">
             I'm <span className="name gradient-text">Souvik Sinhababu</span>
           </h1>
 
-          <h3 className="reveal delay-2">CS Engineer &amp; Cloud Developer</h3>
+          <h3 className="reveal delay-2">Software Engineer &amp; Problem Solver</h3>
 
           <p className="hero-description reveal delay-3">
             Passionate about software engineering, cloud computing,
@@ -1149,7 +1149,7 @@ export default function App() {
               </svg>
               View Projects
             </a>
-            <a href="/resume.pdf" className="secondary-btn">
+            <a href="../assets/Souvik_Sinhababu CV.pdf" className="secondary-btn">
               <Download size={16} />
               Resume (export.pdf)
             </a>
@@ -1170,7 +1170,7 @@ export default function App() {
 
         {/* 3D Profile Card */}
         <div className="hero-right">
-          <span className="canvas-hint">SMART INDIA HACATHON '25 FINALIST</span>
+          <span className="canvas-hint">SMART INDIA HACATHON '25 FINALIST &amp; Team Lead </span>
           
           <div className="profile-card-wrapper" ref={cardWrapperRef}>
             <div 
@@ -1558,7 +1558,7 @@ export default function App() {
                 <input
                   id="rev-name"
                   type="text"
-                  placeholder="e.g., Sourav Ganguly"
+                  placeholder="e.g., Souvik Sinhababu"
                   value={newReviewName}
                   onChange={(e) => setNewReviewName(e.target.value)}
                   required
@@ -1585,7 +1585,7 @@ export default function App() {
                 <label htmlFor="rev-comment">Message *</label>
                 <textarea
                   id="rev-comment"
-                  placeholder="Share your thoughts about my work, projects, or SIH team experience..."
+                  placeholder="Share your thoughts about my work, projects, or team experience..."
                   value={newReviewComment}
                   onChange={(e) => setNewReviewComment(e.target.value)}
                   rows="4"
@@ -1677,7 +1677,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="footer">
         <span className="logo-sm">&lt; Souvik ./ &gt;</span>
-        <span>© 2026 Souvik Sinhababu · Built with React &amp; Vite</span>
+        <span>© 2026 Souvik Sinhababu · Built with Love &amp; Passion</span>
       </footer>
     </motion.div>
       )}
