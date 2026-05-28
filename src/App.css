@@ -819,6 +819,53 @@ body {
     inset 0 0 20px rgba(249, 115, 22, 0.05);
 }
 
+/* See All Grid Toggle Card */
+.see-all-card {
+  border: 1px dashed var(--accent) !important;
+  background: rgba(249, 115, 22, 0.03) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  min-height: 200px !important;
+  padding: 36px 28px !important;
+  border-radius: 20px !important;
+}
+
+.see-all-card:hover {
+  background: rgba(249, 115, 22, 0.08) !important;
+  border-style: solid !important;
+  box-shadow: 
+    0 20px 40px rgba(249, 115, 22, 0.15),
+    inset 0 0 25px rgba(249, 115, 22, 0.1) !important;
+}
+
+.see-all-icon {
+  font-size: 32px !important;
+  margin-bottom: 12px !important;
+  color: var(--accent) !important;
+  transition: transform 0.3s ease !important;
+}
+
+.see-all-card:hover .see-all-icon {
+  transform: translateY(-4px) scale(1.1) !important;
+}
+
+.see-all-title {
+  font-family: var(--font-head) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+}
+
+.see-all-desc {
+  font-size: 12px !important;
+  color: var(--muted) !important;
+  margin-top: 8px !important;
+}
+
+
 .cert-header {
   display: flex;
   justify-content: space-between;

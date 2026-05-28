@@ -371,69 +371,125 @@ export default function App() {
   // Certifications list
   const certifications = [
     {
-      title: "Azure AI Fundamentals (AI-900) - Microsoft Certified",
-      issuer: "Microsoft",
-      date: "Apr 2026",
-      id: "PUxp-uScT",
-      link: "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=455&cvid=26m0VuRk4VtsDk//7ATIrg==",
-      icon: "🧠"
-    },
-    {
-      title: "Supervised Machine Learning: Regression and Classification",
-      issuer: "DeepLearning.AI",
-      date: "Mar 2025",
-      id: "B1DW0ZFLXWSV",
-      link: "https://www.coursera.org/account/accomplishments/verify/B1DW0ZFLXWSV",
-      icon: "🤖"
-    },
-    {
-      title: "NPTEL Java Certification",
-      issuer: "IIT Kharagpur",
-      date: "Nov 2025",
-      id: "NPTEL25CS110S460803974",
-      link: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs110/Course/NPTEL25CS110S46080397410888267.pdf",
-      icon: "☕"
-    },
-    {
-      title: "Google Cloud Fundamentals: Core Infrastructure",
-      issuer: "Google Cloud",
-      date: "Nov 2024",
-      id: "13038962",
-      link: "https://www.skills.google/public_profiles/16ea7d05-4436-4228-b43e-7f2bb2bfb07e/badges/13038962?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      icon: "☁️"
-    },
-    {
-      title: "AI for Beginners by HP LIFE ( HPL-EN40 )",
-      issuer: "HP",
-      date: "Dec 2024",
-      id: "883eaf58-4da8-46f3-b35c-297d22f17c6a",
-      link: "https://www.life-global.org/certificate/883eaf58-4da8-46f3-b35c-297d22f17c6a",
-      icon: "💻"
-    },
-    {
-      title: "Introduction to Git and GitHub",
-      issuer: "Google",
-      date: "Mar 2025",
-      id: "TECWACAUJK9B",
-      link: "https://www.coursera.org/account/accomplishments/verify/TECWACAUJK9B",
-      icon: "🌐"
-    },
-    {
-      title: "Data Base Management System",
-      issuer: "IIT Kharagpur",
-      date: "Mar 2026",
-      id: "NPTEL26CS39S660101642",
-      link: "https://nptel.ac.in/noc/E_Certificate/NOC26CS39S66010164203151734",
-      icon: "💿"
-    },
-    {
-      title: "Programming with Python",
-      issuer: "University of Michigan",
-      date: "Apr 2024",
-      id: "B3NXLPE9QYBY",
-      link: "https://www.coursera.org/account/accomplishments/verify/B3NXLPE9QYBY",
-      icon: "🐍"
-    },
+    "title": "Azure AI Fundamentals (AI-900) - Microsoft Certified",
+    "issuer": "Microsoft",
+    "date": "APR 2026",
+    "id": "PUxp-uScT",
+    "link": "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=455&cvid=26m0VuRk4VtsDk//7ATIrg==",
+    "icon": "🧠"
+  },
+  {
+    "title": "Supervised Machine Learning: Regression and Classification",
+    "issuer": "DeepLearning.AI",
+    "date": "MAR 2025",
+    "id": "B1DW0ZFLXWSV",
+    "link": "https://www.coursera.org/account/accomplishments/verify/B1DW0ZFLXWSV",
+    "icon": "🤖"
+  },
+  {
+    "title": "NPTEL Java Certification",
+    "issuer": "IIT Kharagpur",
+    "date": "NOV 2025",
+    "id": "NPTEL25CS110S460803974",
+    "link": "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs110/Course/NPTEL25CS110S46080397410888267.pdf",
+    "icon": "☕"
+  },
+  {
+    "title": "Data Base Management System",
+    "issuer": "IIT Kharagpur",
+    "date": "MAR 2026",
+    "id": "NPTEL26CS39S660101642",
+    "link": "https://nptel.ac.in/noc/E_Certificate/NOC26CS39S66010164203151734",
+    "icon": "💿"
+  },
+  {
+    "title": "Google Cloud Fundamentals: Core Infrastructure",
+    "issuer": "Google Cloud",
+    "date": "NOV 2024",
+    "id": "13038962",
+    "link": "https://www.skills.google/public_profiles/16ea7d05-4436-4228-b43e-7f2bb2bfb07e/badges/13038962?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
+    "icon": "☁️"
+  },
+  {
+    "title": "Programming with Python",
+    "issuer": "University of Michigan",
+    "date": "APR 2024",
+    "id": "B3NXLPE9QYBY",
+    "link": "https://www.coursera.org/account/accomplishments/verify/B3NXLPE9QYBY",
+    "icon": "🐍"
+  },
+  {
+    "title": "Introduction to Git and GitHub",
+    "issuer": "Google",
+    "date": "MAR 2025",
+    "id": "TECWACAUJK9B",
+    "link": "https://www.coursera.org/account/accomplishments/verify/TECWACAUJK9B",
+    "icon": "🌐"
+  },
+  {
+    "title": "Large Language Model Basics",
+    "issuer": "IBM",
+    "date": "NOV 2024",
+    "id": "MDL-433",
+    "link": "https://skills.yourlearning.ibm.com/certificate/MDL-433",
+    "icon": "🤖"
+  },
+  {
+    "title": "Introduction to Artificial Intelligence",
+    "issuer": "IBM",
+    "date": "NOV 2024",
+    "id": "MDL-211",
+    "link": "https://skills.yourlearning.ibm.com/certificate/MDL-211",
+    "icon": "🧠"
+  },
+  {
+    "title": "Build Your First Chatbot",
+    "issuer": "IBM",
+    "date": "NOV 2024",
+    "id": "ALM-COURSE_3946111",
+    "link": "https://skills.yourlearning.ibm.com/certificate/ALM-COURSE_3946111",
+    "icon": "💬"
+  },
+  {
+    "title": "Generative AI for Decision Makers",
+    "issuer": "AWS",
+    "date": "JAN 2026",
+    "id": "MHMHDAWQJY",
+    "link": "https://drive.google.com/file/d/1KZHjC9anMhmh7OM8oNQ_YJv7tcCdspen/view?usp=sharing",
+    "icon": "🤖"
+  },
+  {
+    "title": "Building a Generative AI-Ready Organization",
+    "issuer": "AWS",
+    "date": "JAN 2026",
+    "id": "BYXUKTZR8P",
+    "link": "https://drive.google.com/file/d/1gn5Q4QC91x-h_bqu1dJOzly3hhjnZA7J/view?usp=sharing",
+    "icon": "🏢"
+  },
+  {
+    "title": "Web Development Basics",
+    "issuer": "IBM",
+    "date": "MAY 2026",
+    "id": "ALM-COURSE_4058937",
+    "link": "https://skills.yourlearning.ibm.com/certificate/ALM-COURSE_4058937",
+    "icon": "🌐"
+  },
+  {
+    "title": "AI for Beginners by HP LIFE ( HPL-EN40 )",
+    "issuer": "HP",
+    "date": "DEC 2024",
+    "id": "883eaf58-4da8-46f3-b35c-297d22f17c6a",
+    "link": "https://www.life-global.org/certificate/883eaf58-4da8-46f3-b35c-297d22f17c6a",
+    "icon": "💻"
+  },
+  {
+    "title": "Getting Started with Artificial Intelligence",
+    "issuer": "IBM",
+    "date": "NOV 2024",
+    "id": "PLAN-E624C2604060",
+    "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-E624C2604060",
+    "icon": "🤖"
+  }
   ];
 
   // Default reviews
@@ -616,6 +672,10 @@ export default function App() {
   const [syncStatus, setSyncStatus] = useState("Syncing with live API...");
   const [lastUpdated, setLastUpdated] = useState("just now");
   const [activeSkillTab, setActiveSkillTab] = useState("weapons");
+  const [certsExpanded, setCertsExpanded] = useState(false);
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
+  const [servicesExpanded, setServicesExpanded] = useState(false);
+
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== "undefined") {
       return window.matchMedia("(max-width: 768px)").matches;
@@ -882,7 +942,8 @@ export default function App() {
         card.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, [shouldRenderMain]);
+  }, [shouldRenderMain, certsExpanded, projectsExpanded, servicesExpanded]);
+
 
   return (
     <>
@@ -1215,16 +1276,35 @@ export default function App() {
         </h2>
         
         <div className="services-grid">
-          {services.map((s, i) => (
+          {(servicesExpanded ? services : services.slice(0, 7)).map((s, i) => (
             <div className="service-card-wrapper" key={s.title}>
-              <div className={`service-card reveal-scale delay-${i + 1}`}>
+              <div className={`service-card reveal-scale delay-${(i % 3) + 1}`}>
                 <div className="service-icon">{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.description}</p>
               </div>
             </div>
           ))}
+          {services.length > 7 && (
+            <div className="service-card-wrapper">
+              <div 
+                className="service-card reveal-scale see-all-card delay-1"
+                onClick={() => setServicesExpanded(!servicesExpanded)}
+              >
+                <span className="see-all-icon">
+                  {servicesExpanded ? "↑" : "+"}
+                </span>
+                <h3 className="see-all-title">
+                  {servicesExpanded ? "Show Less" : `See All (${services.length - 7} More)`}
+                </h3>
+                <p className="see-all-desc">
+                  {servicesExpanded ? "Collapse services list" : "Expand all expertise areas"}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
+
       </section>
 
       <div className="divider" />
@@ -1237,8 +1317,8 @@ export default function App() {
         </h2>
 
         <div className="project-grid">
-          {projects.map((p, i) => (
-            <div className={`project-card reveal-scale delay-${i + 1}`} key={p.title}>
+          {(projectsExpanded ? projects : projects.slice(0, 7)).map((p, i) => (
+            <div className={`project-card reveal-scale delay-${(i % 3) + 1}`} key={p.title}>
               <div className="proj-icon">{p.icon}</div>
               <h3>{p.title}</h3>
               <p>{p.description}</p>
@@ -1253,7 +1333,24 @@ export default function App() {
               </div>
             </div>
           ))}
+          {projects.length > 7 && (
+            <div 
+              className="project-card reveal-scale see-all-card delay-1"
+              onClick={() => setProjectsExpanded(!projectsExpanded)}
+            >
+              <span className="see-all-icon">
+                {projectsExpanded ? "↑" : "+"}
+              </span>
+              <h3 className="see-all-title">
+                {projectsExpanded ? "Show Less" : `See All (${projects.length - 7} More)`}
+              </h3>
+              <p className="see-all-desc">
+                {projectsExpanded ? "Collapse projects list" : "Expand all featured projects"}
+              </p>
+            </div>
+          )}
         </div>
+
       </section>
 
       <div className="divider" />
@@ -1292,7 +1389,7 @@ export default function App() {
         </h2>
 
         <div className="cert-grid">
-          {certifications.map((c, i) => (
+          {(certsExpanded ? certifications : certifications.slice(0, 7)).map((c, i) => (
             <div className={`cert-card reveal-scale delay-${(i % 3) + 1}`} key={c.title}>
               <div className="cert-header">
                 <span className="cert-icon">{c.icon}</span>
@@ -1308,7 +1405,24 @@ export default function App() {
               </div>
             </div>
           ))}
+          {certifications.length > 7 && (
+            <div 
+              className="cert-card reveal-scale see-all-card delay-1"
+              onClick={() => setCertsExpanded(!certsExpanded)}
+            >
+              <span className="see-all-icon">
+                {certsExpanded ? "↑" : "+"}
+              </span>
+              <h3 className="see-all-title">
+                {certsExpanded ? "Show Less" : `See All (${certifications.length - 7} More)`}
+              </h3>
+              <p className="see-all-desc">
+                {certsExpanded ? "Collapse certificates list" : "Expand all professional credentials"}
+              </p>
+            </div>
+          )}
         </div>
+
       </section>
 
       <div className="divider" />
