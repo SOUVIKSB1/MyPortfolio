@@ -851,19 +851,19 @@ export default function App() {
 
   const services = [
     {
+      icon: "🤖",
+      title: "AI & Generative Workflows",
+      description: "Developing intelligent agentic pipelines, conversational chatbots (IBM), and utilizing Large Language Models. Certified in Azure AI Fundamentals, Supervised ML (DeepLearning.AI), and AWS/IBM Generative AI platforms.",
+    },
+    {
       icon: "☁️",
-      title: "Cloud & Infrastructure",
-      description: "Designing scalable cloud architectures on GCP/AWS. Setting up Docker containers, GKE (Kubernetes), and automated Cloud Build CI/CD pipelines.",
+      title: "Cloud & Databases",
+      description: "Architecting cloud-native solutions on AWS and Google Cloud (Google Cloud Fundamentals). Designing structured relational database schemas (NPTEL DBMS) and managing transactional data integrity.",
     },
     {
-      icon: "💻",
-      title: "Full-stack Engineering",
-      description: "Developing modern, fast, and responsive web applications with React, Node.js, Express, and databases like MongoDB and PostgreSQL.",
-    },
-    {
-      icon: "🧠",
-      title: "AI Workflows & Automation",
-      description: "Integrating intelligent LLM pipelines and automation workflows. Building speech and audio optimization pipelines with Vertex AI and Python.",
+      icon: "☕",
+      title: "Software & Web Engineering",
+      description: "Engineering object-oriented programs in Java (NPTEL Java) and scripting automated scripts in Python. Constructing secure web applications integrated with Git/GitHub version control.",
     },
   ];
 

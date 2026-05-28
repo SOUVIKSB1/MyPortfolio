@@ -15,6 +15,7 @@
   --text: #f0f0f0;
   --muted: #6b7280;
   --accent: #f97316;
+  --accent-blue: #0ea5e9;
   --accent2: #ea580c;
   --accent3: #c2410c;
   --glow: rgba(249, 115, 22, 0.25);
@@ -821,24 +822,11 @@ body {
 
 /* See All Grid Toggle Card */
 .see-all-card {
-  border: 1px dashed var(--accent) !important;
-  background: rgba(249, 115, 22, 0.03) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
-  min-height: 200px !important;
-  padding: 36px 28px !important;
-  border-radius: 20px !important;
-}
-
-.see-all-card:hover {
-  background: rgba(249, 115, 22, 0.08) !important;
-  border-style: solid !important;
-  box-shadow: 
-    0 20px 40px rgba(249, 115, 22, 0.15),
-    inset 0 0 25px rgba(249, 115, 22, 0.1) !important;
 }
 
 .see-all-icon {
@@ -866,6 +854,7 @@ body {
 }
 
 
+
 .cert-header {
   display: flex;
   justify-content: space-between;
@@ -886,7 +875,7 @@ body {
 
 .cert-date {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--accent-blue);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -903,7 +892,7 @@ body {
 
 .cert-issuer {
   font-size: 13.5px;
-  color: var(--muted);
+  color: var(--accent-blue);
   margin-bottom: 24px;
 }
 
@@ -2319,6 +2308,7 @@ body {
     padding: 8px 4px 16px !important;
     scrollbar-width: none !important;
     margin-top: 16px !important;
+    align-items: stretch !important;
   }
   .services-grid::-webkit-scrollbar {
     display: none !important;
@@ -2326,6 +2316,13 @@ body {
   .services-grid .service-card-wrapper {
     flex: 0 0 260px !important;
     scroll-snap-align: start !important;
+    display: flex !important;
+    align-items: stretch !important;
+  }
+  .services-grid .service-card {
+    width: 100% !important;
+    height: auto !important;
+    align-self: stretch !important;
   }
 
   /* 4. Projects Swipe Carousel */
@@ -2337,6 +2334,7 @@ body {
     padding: 8px 4px 16px !important;
     scrollbar-width: none !important;
     margin-top: 20px !important;
+    align-items: stretch !important;
   }
   .project-grid::-webkit-scrollbar {
     display: none !important;
@@ -2345,6 +2343,8 @@ body {
     flex: 0 0 270px !important;
     scroll-snap-align: start !important;
     margin-bottom: 0 !important;
+    height: auto !important;
+    align-self: stretch !important;
   }
 
   /* Compacting widgets and lists */
@@ -2402,6 +2402,7 @@ body {
     padding: 8px 4px 16px !important;
     scrollbar-width: none !important;
     margin-top: 20px !important;
+    align-items: stretch !important;
   }
   .cert-grid::-webkit-scrollbar {
     display: none !important;
@@ -2410,6 +2411,8 @@ body {
     flex: 0 0 280px !important;
     scroll-snap-align: start !important;
     margin-bottom: 0 !important;
+    height: auto !important;
+    align-self: stretch !important;
   }
 }
 
