@@ -853,17 +853,57 @@ export default function App() {
     {
       icon: "🤖",
       title: "AI & Generative Workflows",
-      description: "Developing intelligent agentic pipelines, conversational chatbots (IBM), and utilizing Large Language Models. Certified in Azure AI Fundamentals, Supervised ML (DeepLearning.AI), and AWS/IBM Generative AI platforms.",
+      description: "Developing intelligent agentic pipelines, conversational LLM chatbots, and integrating cognitive APIs. Certified in Microsoft Azure AI, AWS GenAI, and IBM Cognitive platforms.",
+    },
+    {
+      icon: "📊",
+      title: "Machine Learning Engineering",
+      description: "Building predictive systems, feature pipelines, and training models using regression and classification algorithms. Backed by DeepLearning.AI ML standards.",
     },
     {
       icon: "☁️",
-      title: "Cloud & Databases",
-      description: "Architecting cloud-native solutions on AWS and Google Cloud (Google Cloud Fundamentals). Designing structured relational database schemas (NPTEL DBMS) and managing transactional data integrity.",
+      title: "Cloud Infrastructure",
+      description: "Provisioning secure compute, networking, and storage instances on Google Cloud Platform and AWS. Architecting scalable environments using GCP Fundamentals.",
+    },
+    {
+      icon: "💿",
+      title: "Database Management (DBMS)",
+      description: "Designing high-performance schema architectures, tuning SQL queries, and implementing transaction controls. Fuses academic NPTEL DBMS standards from IIT Kharagpur.",
+    },
+    {
+      icon: "💻",
+      title: "Full-Stack Web Engineering",
+      description: "Developing responsive frontend client interfaces in React and building robust, RESTful API servers in Node.js/Express with MongoDB database integrations.",
     },
     {
       icon: "☕",
-      title: "Software & Web Engineering",
-      description: "Engineering object-oriented programs in Java (NPTEL Java) and scripting automated scripts in Python. Constructing secure web applications integrated with Git/GitHub version control.",
+      title: "Object-Oriented Design (Java)",
+      description: "Designing scalable software applications using clean Java principles, data structures, and multithreading. Certified by NPTEL/IIT Kharagpur.",
+    },
+    {
+      icon: "🐍",
+      title: "Automation & Python Scripting",
+      description: "Writing automated scripts, data scraping tools, and backend utilities in Python, including solving algorithmic state-space problems (like 8-Puzzle search).",
+    },
+    {
+      icon: "⚙️",
+      title: "Hardware Logic Design",
+      description: "Designing digital circuits and simulating computer architecture modules using VHDL, referencing hands-on hardware laboratory layouts (PCC-CS-492).",
+    },
+    {
+      icon: "🌐",
+      title: "Collaborative Git/GitHub",
+      description: "Managing source code version control, designing branching strategies, and handling collaborative pull requests and code reviews based on Google standards.",
+    },
+    {
+      icon: "💰",
+      title: "State & Data Hydration",
+      description: "Developing state-driven transaction applications (such as PiggyBank) that manage local state, caching, data visualization, and secure client-side storage.",
+    },
+    {
+      icon: "🎨",
+      title: "Interactive UI Engineering",
+      description: "Designing high-fidelity user interfaces with fluid layouts, dark themes, and glassmorphic micro-interactions using modern Vanilla CSS and Framer Motion.",
     },
   ];
 
@@ -945,8 +985,35 @@ export default function App() {
     };
   }, [shouldRenderMain, certsExpanded, projectsExpanded, servicesExpanded]);
 
+  // Calculate B.Tech academic year dynamically (started in 2023)
+  const btechStartYear = 2023;
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth(); // 0-indexed (Jan = 0, May = 4, July = 6)
+  const academicYear = currentYear - btechStartYear + (currentMonth >= 6 ? 1 : 0);
+  const suffix = academicYear === 1 ? "st" : academicYear === 2 ? "nd" : academicYear === 3 ? "rd" : "th";
+  const dynamicBtechYear = `${academicYear}${suffix}`;
+
+  // Find the active mission topic dynamically based on the latest certification
+  const latestCert = certifications[0];
+  let certKeyword = "Cloud/DevOps";
+  if (latestCert) {
+    const titleLower = latestCert.title.toLowerCase();
+    if (titleLower.includes("ai")) {
+      certKeyword = "AI Engineering";
+    } else if (titleLower.includes("cloud")) {
+      certKeyword = "Cloud & DevOps";
+    } else if (titleLower.includes("java")) {
+      certKeyword = "Java Development";
+    } else if (titleLower.includes("web")) {
+      certKeyword = "Web Engineering";
+    } else if (titleLower.includes("machine learning")) {
+      certKeyword = "Machine Learning";
+    }
+  }
+  const dynamicMissionLabel = `Mission: ${certKeyword}`;
 
   return (
+
     <>
       {loading && (
         <StartAnimation 
@@ -1198,12 +1265,12 @@ export default function App() {
           <div className="about-right-col">
             <div className="stats-grid">
               {[
-                { num: "3+",  label: "Projects" },
-                { num: "2+",  label: "Years" },
-                { num: "10+", label: "Technologies" },
-                { num: "GCP", label: "Certified" },
-                { num: "∞",   label: "Curiosity" },
-                { num: "01",  label: "Mission" },
+                { num: `${projects.length}`,       label: "Projects" },
+                { num: dynamicBtechYear,           label: "Year B.Tech" },
+                { num: "10+",                      label: "Technologies" },
+                { num: `${certifications.length}`, label: "Certifications" },
+                { num: "∞",                        label: "Curiosity" },
+                { num: "01",                       label: dynamicMissionLabel },
               ].map((s, idx) => (
                 <div className={`stat-card reveal-scale delay-${(idx % 3) + 1}`} key={s.label}>
                   <h3>{s.num}</h3>
