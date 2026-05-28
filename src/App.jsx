@@ -341,7 +341,7 @@ function useThreeConstellation(canvasRef, shouldRender) {
 /* ═══════════════════════════════════
    SCROLL REVEAL HOOK
 ═══════════════════════════════════ */
-function useScrollReveal(shouldRender) {
+function useScrollReveal(shouldRender, certsExpanded, projectsExpanded, servicesExpanded) {
   useEffect(() => {
     if (!shouldRender) return;
     const obs = new IntersectionObserver(
@@ -356,8 +356,9 @@ function useScrollReveal(shouldRender) {
     );
     document.querySelectorAll(".reveal, .reveal-title, .reveal-text, .reveal-scale, .reveal-fade-up").forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, [shouldRender]);
+  }, [shouldRender, certsExpanded, projectsExpanded, servicesExpanded]);
 }
+
 
 /* ═══════════════════════════════════
    APP COMPONENT
@@ -688,7 +689,7 @@ export default function App() {
   const shouldRenderMain = isExiting || !loading;
 
   useThreeConstellation(canvasRef, shouldRenderMain);
-  useScrollReveal(shouldRenderMain);
+  useScrollReveal(shouldRenderMain, certsExpanded, projectsExpanded, servicesExpanded);
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 768px)");
