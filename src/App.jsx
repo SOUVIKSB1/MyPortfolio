@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Mail, ExternalLink, Download, Menu, X } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import * as THREE from "three";
@@ -1160,24 +1160,48 @@ export default function App() {
   const suffix = academicYear === 1 ? "st" : academicYear === 2 ? "nd" : academicYear === 3 ? "rd" : "th";
   const dynamicBtechYear = `${academicYear}${suffix}`;
 
-  // Find the active mission topic dynamically based on the latest certification
-  const latestCert = certifications[0];
-  let certKeyword = "Cloud/DevOps";
-  if (latestCert) {
-    const titleLower = latestCert.title.toLowerCase();
-    if (titleLower.includes("ai")) {
-      certKeyword = "AI Engineering";
-    } else if (titleLower.includes("cloud")) {
-      certKeyword = "Cloud & DevOps";
-    } else if (titleLower.includes("java")) {
-      certKeyword = "Java Development";
-    } else if (titleLower.includes("web")) {
-      certKeyword = "Web Engineering";
-    } else if (titleLower.includes("machine learning")) {
-      certKeyword = "Machine Learning";
+  // Determine the active mission topic dynamically based on the latest certification by date using memoization
+  const dynamicMissionLabel = useMemo(() => {
+    if (certifications.length === 0) return "Mission: Cloud/DevOps";
+
+    // Helper to parse dates in format "MMM YYYY" (e.g., "APR 2026", "MAR 2025")
+    const parseCertDate = (dateStr) => {
+      if (!dateStr) return 0;
+      const parts = dateStr.trim().split(/\s+/);
+      if (parts.length < 2) return 0;
+      const months = {
+        jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+        jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+      };
+      const month = months[parts[0].toLowerCase()] || 0;
+      const year = parseInt(parts[1], 10) || 0;
+      return new Date(year, month).getTime();
+    };
+
+    // Find the certification with the most recent date
+    let latestCert = certifications[0];
+    let latestTime = parseCertDate(latestCert.date);
+
+    for (let i = 1; i < certifications.length; i++) {
+      const time = parseCertDate(certifications[i].date);
+      if (time > latestTime) {
+        latestTime = time;
+        latestCert = certifications[i];
+      }
     }
-  }
-  const dynamicMissionLabel = `Mission: ${certKeyword}`;
+
+    const titleLower = latestCert.title.toLowerCase();
+    const mappings = [
+      { key: "machine learning", label: "Machine Learning" },
+      { key: "ai",               label: "AI Engineering" },
+      { key: "cloud",            label: "Cloud & DevOps" },
+      { key: "java",             label: "Java Development" },
+      { key: "web",              label: "Web Engineering" }
+    ];
+
+    const match = mappings.find((m) => titleLower.includes(m.key));
+    return `Mission: ${match ? match.label : "Cloud/DevOps"}`;
+  }, [certifications]);
 
   return (
 
