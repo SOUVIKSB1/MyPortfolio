@@ -371,54 +371,94 @@ export default function App() {
   // Certifications list
   const certifications = [
     {
-      title: "Associate Cloud Engineer Certificate",
-      issuer: "Google Cloud Training",
-      date: "Oct 2024",
-      id: "GCP-ACE-82910",
-      link: "https://www.cloudskillsboost.google/",
+      title: "Azure AI Fundamentals (AI-900) - Microsoft Certified",
+      issuer: "Microsoft",
+      date: "Apr 2026",
+      id: "PUxp-uScT",
+      link: "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=455&cvid=26m0VuRk4VtsDk//7ATIrg==",
+      icon: "🧠"
+    },
+    {
+      title: "Supervised Machine Learning: Regression and Classification",
+      issuer: "DeepLearning.AI",
+      date: "Mar 2025",
+      id: "B1DW0ZFLXWSV",
+      link: "https://www.coursera.org/account/accomplishments/verify/B1DW0ZFLXWSV",
+      icon: "🤖"
+    },
+    {
+      title: "NPTEL Java Certification",
+      issuer: "IIT Kharagpur",
+      date: "Nov 2025",
+      id: "NPTEL25CS110S460803974",
+      link: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs110/Course/NPTEL25CS110S46080397410888267.pdf",
+      icon: "☕"
+    },
+    {
+      title: "Google Cloud Fundamentals: Core Infrastructure",
+      issuer: "Google Cloud",
+      date: "Nov 2024",
+      id: "13038962",
+      link: "https://www.skills.google/public_profiles/16ea7d05-4436-4228-b43e-7f2bb2bfb07e/badges/13038962?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
       icon: "☁️"
     },
     {
-      title: "Docker & Kubernetes Specialist Certification",
-      issuer: "KodeKloud / Linux Foundation",
-      date: "July 2024",
-      id: "DK-KUBE-47209",
-      link: "https://kodekloud.com/",
-      icon: "🐳"
+      title: "AI for Beginners by HP LIFE ( HPL-EN40 )",
+      issuer: "HP",
+      date: "Dec 2024",
+      id: "883eaf58-4da8-46f3-b35c-297d22f17c6a",
+      link: "https://www.life-global.org/certificate/883eaf58-4da8-46f3-b35c-297d22f17c6a",
+      icon: "💻"
     },
     {
-      title: "Full-Stack Web Developer Certificate",
-      issuer: "Techno Main / SIH Academy",
-      date: "Dec 2023",
-      id: "FS-WEB-90812",
-      link: "https://github.com/SOUVIKSB1",
-      icon: "💻"
-    }
+      title: "Introduction to Git and GitHub",
+      issuer: "Google",
+      date: "Mar 2025",
+      id: "TECWACAUJK9B",
+      link: "https://www.coursera.org/account/accomplishments/verify/TECWACAUJK9B",
+      icon: "🌐"
+    },
+    {
+      title: "Data Base Management System",
+      issuer: "IIT Kharagpur",
+      date: "Mar 2026",
+      id: "NPTEL26CS39S660101642",
+      link: "https://nptel.ac.in/noc/E_Certificate/NOC26CS39S66010164203151734",
+      icon: "💿"
+    },
+    {
+      title: "Programming with Python",
+      issuer: "University of Michigan",
+      date: "Apr 2024",
+      id: "B3NXLPE9QYBY",
+      link: "https://www.coursera.org/account/accomplishments/verify/B3NXLPE9QYBY",
+      icon: "🐍"
+    },
   ];
 
   // Default reviews
   const defaultReviews = [
     {
-      name: "Aman Gupta",
-      role: "SIH Finalist Team Lead",
-      rating: 5,
-      comment: "Souvik's cloud architecture setup was flawless. He deployed our Kubernetes nodes and Vertex AI services within hours during the hackathon!",
-      date: "Apr 2025"
-    },
-    {
-      name: "Dr. R. Sen",
-      role: "CSE Professor at Techno Main",
-      rating: 5,
-      comment: "An exceptionally diligent student. Souvik bridges Frontend and Cloud DevOps with standard design tokens and clean structure.",
-      date: "Jan 2026"
-    },
-    {
-      name: "Vikram Malhotra",
-      role: "Open-source Collaborator",
-      rating: 4,
-      comment: "Great attention to visual styles. The hacker loading animation transition and full-bleed carousels make this portfolio state-of-the-art.",
-      date: "May 2026"
-    }
+    name: "Rajarshi Chatterjee",
+    role: "SIH Finalist",
+    rating: 5,
+    comment: "Souvik's cloud architecture setup was flawless. He deployed our Kubernetes nodes and Vertex AI services within hours during the hackathon!",
+    date: "Apr 2026"
+  },
+  {
+    name: "Prof U. Das",
+    role: "CSE Professor at Techno Main",
+    rating: 5,
+    comment: "An exceptionally diligent student. Souvik bridges Frontend and Cloud DevOps with standard design tokens and clean structure.",
+    date: "Jan 2026"
+  },
+  {
+    name: "Supriya Satpati",
+    role: "Open-source Collaborator",
+    rating: 4,
+    comment: "Great attention to visual styles. The hacker loading animation transition and full-bleed carousels make this portfolio state-of-the-art.",
+    date: "May 2026"
+  }
   ];
 
   const [reviews, setReviews] = useState(() => {

@@ -48,21 +48,21 @@ const Review = mongoose.model('Review', reviewSchema);
 // Memory database fallback if MongoDB URI is not provided or fails to connect
 let memoryReviews = [
   {
-    name: "Aman Gupta",
-    role: "SIH Finalist Team Lead",
+    name: "Rajarshi Chatterjee",
+    role: "SIH Finalist",
     rating: 5,
     comment: "Souvik's cloud architecture setup was flawless. He deployed our Kubernetes nodes and Vertex AI services within hours during the hackathon!",
-    date: "Apr 2025"
+    date: "Apr 2026"
   },
   {
-    name: "Dr. R. Sen",
+    name: "Prof U. Das",
     role: "CSE Professor at Techno Main",
     rating: 5,
     comment: "An exceptionally diligent student. Souvik bridges Frontend and Cloud DevOps with standard design tokens and clean structure.",
     date: "Jan 2026"
   },
   {
-    name: "Vikram Malhotra",
+    name: "Supriya Satpati",
     role: "Open-source Collaborator",
     rating: 4,
     comment: "Great attention to visual styles. The hacker loading animation transition and full-bleed carousels make this portfolio state-of-the-art.",
