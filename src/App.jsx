@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Mail, ExternalLink, Download, Menu, X } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import * as THREE from "three";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import StartAnimation from "./components/StartAnimation";
 import profileImg from "./assets/hero.png";
 import "./App.css";
@@ -1095,6 +1095,166 @@ export default function App() {
     },
   ];
 
+  const achievements = [
+    {
+      title: "Smart India Hackathon '25 Finalist",
+      organization: "Ministry of Education, Govt. of India",
+      date: "DEC 2025",
+      description: "Led a 6-member team to the grand finale of India's largest national hackathon. Architected a cloud-native GKE solution for PS 25067, focusing on the design and development of an application for Heavy Metal Pollution Indices.",
+      badge: "National Finalist",
+      icon: "🏆",
+      tags: ["Cloud Native", "Leadership", "Innovation", "Problem Solving"]
+    },
+    {
+      title: "Google Cloud Arcade Champion",
+      organization: "Google Cloud Program",
+      date: "DEC 2024",
+      description: "Earned Champion tier by completing advanced hands-on labs on Kubernetes, cloud security, BigQuery analytics, and Vertex AI. Solved 140+ cloud skill badges and arcade game challenges.",
+      badge: "Cloud Champion",
+      icon: "☁️",
+      tags: ["GCP", "Kubernetes", "Cloud Security", "BigQuery"]
+    },
+    {
+      title: "DSA & Problem Solving",
+      organization: "LeetCode & GeeksforGeeks",
+      date: "2024 - Present",
+      description: "Solved 300+ algorithmic challenges on LeetCode and GeeksforGeeks. Achieved solid coding profiles demonstrating expertise in complex data structures, search algorithms, graph theory, and dynamic programming.",
+      badge: "Problem Solver",
+      icon: "🧮",
+      tags: ["Data Structures", "Algorithms", "Java", "Python"]
+    },
+    {
+      title: "Campus Robotics Finalist (Autobots)",
+      organization: "Techno Main Salt Lake",
+      date: "MAR 2024",
+      description: "Finalist in the campus robotics competition. Engineered and programmed an autonomous line-following and obstacle-avoidance robot. Optimized sensor feedback loops and PID algorithms for swift navigation.",
+      badge: "Tech Finalist",
+      icon: "🤖",
+      tags: ["Embedded Systems", "Sensors", "VHDL", "Autonomous", "Arduino"]
+    },
+    {
+      title: "3-Years+ Class Representative (CR)",
+      organization: "Techno Main Salt Lake",
+      date: "2023 - Present",
+      description: "Elected student representative managing academic coordination for a batch of 130+ students. Facilitated direct communication between students and faculty, and coordinated technical workshops and campus events.",
+      badge: "Leadership",
+      icon: "👥",
+      tags: ["Communication", "Management", "Event Planning"]
+    },
+    {
+      title: "IEEE Student Member",
+      organization: "IEEE",
+      date: "2024 - Present",
+      description: "Active member of the IEEE student chapter. Participated in technical workshops, networking events, and collaborative projects with industry professionals and fellow students. Facilitated campus hackathons.",
+      badge: "Professional",
+      icon: "🌐",
+      tags: ["Networking", "Technical Workshops", "Collaboration"]
+    },
+    {
+      title: "Photography & Visual Storytelling",
+      organization: "Creative Arts Club",
+      date: "2016 - Present",
+      description: "Freelance visual creator specializing in capturing campus events, street documentation, and high-fidelity product frames. Uses design rules of framing and lighting to tell stories.",
+      badge: "Creative",
+      icon: "📸",
+      tags: ["Framing", "Adobe Lightroom", "Visual Design"]
+    },
+    {
+      title: "Content Creation & Digital Storytelling",
+      organization: "Instagram · YouTube · Facebook",
+      date: "2019 - Present",
+      description: "Passionate content creator focused on crafting engaging digital experiences through short-form content, tech storytelling, and visual communication. Combines creativity with audience psychology.",
+      badge: "Creator",
+      icon: "🎬",
+      tags: ["Content Strategy", "Editing", "Digital Branding"]
+    }
+  ];
+
+  // Framer Motion Animation Variants for Collapsible Cards
+  const serviceVariants = {
+    hidden: { opacity: 0, y: 70, scale: 0.85, rotateX: 12 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        type: "spring",
+        stiffness: 90,
+        damping: 14,
+        mass: 0.7,
+        delay: (i - 7) * 0.05
+      }
+    }),
+    exit: (i) => ({
+      opacity: 0,
+      y: 50,
+      scale: 0.85,
+      rotateX: -12,
+      transition: {
+        duration: 0.3,
+        ease: [0.16, 1, 0.3, 1],
+        delay: (services.length - 1 - i) * 0.03
+      }
+    })
+  };
+
+  const projectVariants = {
+    hidden: { opacity: 0, y: 70, scale: 0.85, rotateX: 12 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        type: "spring",
+        stiffness: 90,
+        damping: 14,
+        mass: 0.7,
+        delay: (i - 7) * 0.05
+      }
+    }),
+    exit: (i) => ({
+      opacity: 0,
+      y: 50,
+      scale: 0.85,
+      rotateX: -12,
+      transition: {
+        duration: 0.3,
+        ease: [0.16, 1, 0.3, 1],
+        delay: (projects.length - 1 - i) * 0.03
+      }
+    })
+  };
+
+  const certVariants = {
+    hidden: { opacity: 0, y: 70, scale: 0.85, rotateX: 12 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        type: "spring",
+        stiffness: 90,
+        damping: 14,
+        mass: 0.7,
+        delay: (i - 7) * 0.05
+      }
+    }),
+    exit: (i) => ({
+      opacity: 0,
+      y: 50,
+      scale: 0.85,
+      rotateX: -12,
+      transition: {
+        duration: 0.3,
+        ease: [0.16, 1, 0.3, 1],
+        delay: (certifications.length - 1 - i) * 0.03
+      }
+    })
+  };
+
   const handleCardMouseMove = (e) => {
     const card = cardWrapperRef.current;
     if (!card) return;
@@ -1117,7 +1277,7 @@ export default function App() {
 
   useEffect(() => {
     if (!shouldRenderMain) return;
-    const cards = document.querySelectorAll(".project-card, .service-card, .cert-card");
+    const cards = document.querySelectorAll(".project-card, .service-card, .cert-card, .achievement-card");
     
     const handleMouseMove = (e) => {
       const card = e.currentTarget;
@@ -1209,14 +1369,15 @@ export default function App() {
       <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
         <div className="logo">&lt; Souvik ./ &gt;</div>
         <ul className={`nav-links${menuOpen ? " active" : ""}`}>
-          <li><a href="#home"           onClick={() => setMenuOpen(false)}>RETURN (0)</a></li>
+          <li><a href="#home"           onClick={() => setMenuOpen(false)}>RETURN ( 0 )</a></li>
           <li><a href="#about"          onClick={() => setMenuOpen(false)}>PRINTF ( )</a></li>
-          <li><a href="#services"       onClick={() => setMenuOpen(false)}>FUNCTION ( )</a></li>
+          <li><a href="#services"       onClick={() => setMenuOpen(false)}>FUNC ( )</a></li>
           <li><a href="#projects"       onClick={() => setMenuOpen(false)}>BUILD ( )</a></li>
-          <li><a href="#experience"     onClick={() => setMenuOpen(false)}>WHILE ( LEARNING )</a></li>
-          <li><a href="#certifications" onClick={() => setMenuOpen(false)}>CREDENTIALS [ ]</a></li>
-          <li><a href="#feedback"       onClick={() => setMenuOpen(false)}>REPUTATION ++</a></li>
-          <li><a href="#contact"        onClick={() => setMenuOpen(false)}>PING ( )</a></li>
+          <li><a href="#experience"     onClick={() => setMenuOpen(false)}>LEARN ( )</a></li>
+          <li><a href="#achievements"   onClick={() => setMenuOpen(false)}>Milestones [ ]</a></li>
+          <li><a href="#certifications" onClick={() => setMenuOpen(false)}>LICENSES {`{ }`}</a></li>
+          <li><a href="#feedback"       onClick={() => setMenuOpen(false)}>AURA ++</a></li>
+          <li><a href="#contact"        onClick={() => setMenuOpen(false)}>PING _ </a></li>
         </ul>
         <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -1449,30 +1610,32 @@ export default function App() {
               ))}
             </div>
 
-            <div className="skills-category reveal-scale delay-2">
-              <h3>Secret Weapons</h3>
-              <div className="skills-list">
-                {languagesList.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
+            <div className="skills-carousel">
+              <div className="skills-category reveal-scale delay-2">
+                <h3>Secret Weapons</h3>
+                <div className="skills-list">
+                  {languagesList.map((s) => (
+                    <span key={s}>{s}</span>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="skills-category reveal-scale delay-3">
-              <h3>Frameworks &amp; Architecture</h3>
-              <div className="skills-list">
-                {frameworksList.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
+              <div className="skills-category reveal-scale delay-3">
+                <h3>Frameworks &amp; Architecture</h3>
+                <div className="skills-list">
+                  {frameworksList.map((s) => (
+                    <span key={s}>{s}</span>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="skills-category reveal-scale delay-4">
-              <h3>Cloud, DevOps &amp; AI</h3>
-              <div className="skills-list">
-                {cloudList.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
+              <div className="skills-category reveal-scale delay-4">
+                <h3>Cloud, DevOps &amp; AI</h3>
+                <div className="skills-list">
+                  {cloudList.map((s) => (
+                    <span key={s}>{s}</span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -1489,18 +1652,39 @@ export default function App() {
           What I <span className="gradient-text">Excel At</span>
         </h2>
         
-        <div className="services-grid">
-          {(servicesExpanded ? services : services.slice(0, 7)).map((s, i) => (
-            <div className="service-card-wrapper" key={s.title}>
-              <div className={`service-card reveal-scale delay-${(i % 3) + 1}`}>
-                <div className="service-icon">{s.icon}</div>
-                <h3>{s.title}</h3>
-                <p>{s.description}</p>
-              </div>
-            </div>
-          ))}
+        <motion.div layout className="services-grid">
+          <AnimatePresence mode="popLayout">
+            {(servicesExpanded ? services : services.slice(0, 7)).map((s, i) => {
+              const isCollapsible = i >= 7;
+              return (
+                <motion.div 
+                  layout
+                  key={s.title}
+                  className="service-card-wrapper"
+                  {...(isCollapsible ? {
+                    custom: i,
+                    variants: serviceVariants,
+                    initial: "hidden",
+                    animate: "visible",
+                    exit: "exit"
+                  } : {})}
+                  transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
+                >
+                  <div className={`service-card ${isCollapsible ? "in" : "reveal-scale"}`}>
+                    <div className="service-icon">{s.icon}</div>
+                    <h3>{s.title}</h3>
+                    <p>{s.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
           {services.length > 7 && (
-            <div className="service-card-wrapper">
+            <motion.div 
+              layout
+              className="service-card-wrapper"
+              transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
+            >
               <div 
                 className="service-card reveal-scale see-all-card delay-1"
                 onClick={() => setServicesExpanded(!servicesExpanded)}
@@ -1515,9 +1699,9 @@ export default function App() {
                   {servicesExpanded ? "Collapse services list" : "Expand all expertise areas"}
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
       </section>
 
@@ -1530,40 +1714,65 @@ export default function App() {
           Featured <span className="gradient-text">Projects</span>
         </h2>
 
-        <div className="project-grid">
-          {(projectsExpanded ? projects : projects.slice(0, 7)).map((p, i) => (
-            <div className={`project-card reveal-scale delay-${(i % 3) + 1}`} key={p.title}>
-              <div className="proj-icon">{p.icon}</div>
-              <h3>{p.title}</h3>
-              <p>{p.description}</p>
-              <span className="proj-tech">{p.tech}</span>
-              <div className="project-links">
-                <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub">
-                  <FaGithub size={14} /> GitHub
-                </a>
-                <a href={p.live} target="_blank" rel="noreferrer" aria-label="Live demo">
-                  <ExternalLink size={14} /> Live Demo
-                </a>
-              </div>
-            </div>
-          ))}
+        <motion.div layout className="project-grid">
+          <AnimatePresence mode="popLayout">
+            {(projectsExpanded ? projects : projects.slice(0, 7)).map((p, i) => {
+              const isCollapsible = i >= 7;
+              return (
+                <motion.div
+                  layout
+                  key={p.title}
+                  className="project-card-wrapper"
+                  {...(isCollapsible ? {
+                    custom: i,
+                    variants: projectVariants,
+                    initial: "hidden",
+                    animate: "visible",
+                    exit: "exit"
+                  } : {})}
+                  transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
+                >
+                  <div className={`project-card ${isCollapsible ? "in" : "reveal-scale"}`}>
+                    <div className="proj-icon">{p.icon}</div>
+                    <h3>{p.title}</h3>
+                    <p>{p.description}</p>
+                    <span className="proj-tech">{p.tech}</span>
+                    <div className="project-links">
+                      <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                        <FaGithub size={14} /> GitHub
+                      </a>
+                      <a href={p.live} target="_blank" rel="noreferrer" aria-label="Live demo">
+                        <ExternalLink size={14} /> Live Demo
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
           {projects.length > 7 && (
-            <div 
-              className="project-card reveal-scale see-all-card delay-1"
-              onClick={() => setProjectsExpanded(!projectsExpanded)}
+            <motion.div 
+              layout
+              className="project-card-wrapper"
+              transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
             >
-              <span className="see-all-icon">
-                {projectsExpanded ? "↑" : "+"}
-              </span>
-              <h3 className="see-all-title">
-                {projectsExpanded ? "Show Less" : `See All (${projects.length - 7} More)`}
-              </h3>
-              <p className="see-all-desc">
-                {projectsExpanded ? "Collapse projects list" : "Expand all featured projects"}
-              </p>
-            </div>
+              <div 
+                className="project-card reveal-scale see-all-card delay-1"
+                onClick={() => setProjectsExpanded(!projectsExpanded)}
+              >
+                <span className="see-all-icon">
+                  {projectsExpanded ? "↑" : "+"}
+                </span>
+                <h3 className="see-all-title">
+                  {projectsExpanded ? "Show Less" : `See All (${projects.length - 7} More)`}
+                </h3>
+                <p className="see-all-desc">
+                  {projectsExpanded ? "Collapse projects list" : "Expand all featured projects"}
+                </p>
+              </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
       </section>
 
@@ -1594,6 +1803,37 @@ export default function App() {
 
       <div className="divider" />
 
+      {/* ── ACHIEVEMENTS ── */}
+      <section className="achievements-section" id="achievements">
+        <div className="ambient-glow glow-2" style={{ background: "radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%)" }} />
+        <div className="section-label reveal-fade-up" style={{ justifyContent: "center" }}>Milestones</div>
+        <h2 className="section-title reveal-title" style={{ textAlign: "center" }}>
+          Key <span className="gradient-text">Achievements</span>
+        </h2>
+
+        <div className="achievements-grid">
+          {achievements.map((ach, i) => (
+            <div className={`achievement-card reveal-scale delay-${(i % 3) + 1}`} key={ach.title}>
+              <div className="ach-header">
+                <div className="ach-icon">{ach.icon}</div>
+                <span className="ach-badge">{ach.badge}</span>
+              </div>
+              <span className="ach-date">{ach.date}</span>
+              <h3>{ach.title}</h3>
+              <p className="ach-org">{ach.organization}</p>
+              <p className="ach-desc">{ach.description}</p>
+              <div className="ach-tags">
+                {ach.tags.map((t) => (
+                  <span key={t} className="ach-tag">{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="divider" />
+
       {/* ── CERTIFICATIONS ── */}
       <section className="certifications-section" id="certifications">
         <div className="ambient-glow glow-1" />
@@ -1602,40 +1842,65 @@ export default function App() {
           Professional <span className="gradient-text">Certifications</span>
         </h2>
 
-        <div className="cert-grid">
-          {(certsExpanded ? certifications : certifications.slice(0, 7)).map((c, i) => (
-            <div className={`cert-card reveal-scale delay-${(i % 3) + 1}`} key={c.title}>
-              <div className="cert-header">
-                <span className="cert-icon">{c.icon}</span>
-                <span className="cert-date">{c.date}</span>
-              </div>
-              <h3>{c.title}</h3>
-              <p className="cert-issuer">{c.issuer}</p>
-              <div className="cert-footer">
-                <span className="cert-id">ID: {c.id}</span>
-                <a href={c.link} target="_blank" rel="noreferrer" className="cert-link-btn">
-                  Verify <ExternalLink size={12} />
-                </a>
-              </div>
-            </div>
-          ))}
+        <motion.div layout className="cert-grid">
+          <AnimatePresence mode="popLayout">
+            {(certsExpanded ? certifications : certifications.slice(0, 7)).map((c, i) => {
+              const isCollapsible = i >= 7;
+              return (
+                <motion.div
+                  layout
+                  key={c.title}
+                  className="cert-card-wrapper"
+                  {...(isCollapsible ? {
+                    custom: i,
+                    variants: certVariants,
+                    initial: "hidden",
+                    animate: "visible",
+                    exit: "exit"
+                  } : {})}
+                  transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
+                >
+                  <div className={`cert-card ${isCollapsible ? "in" : "reveal-scale"}`}>
+                    <div className="cert-header">
+                      <span className="cert-icon">{c.icon}</span>
+                      <span className="cert-date">{c.date}</span>
+                    </div>
+                    <h3>{c.title}</h3>
+                    <p className="cert-issuer">{c.issuer}</p>
+                    <div className="cert-footer">
+                      <span className="cert-id">ID: {c.id}</span>
+                      <a href={c.link} target="_blank" rel="noreferrer" className="cert-link-btn">
+                        Verify <ExternalLink size={12} />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
           {certifications.length > 7 && (
-            <div 
-              className="cert-card reveal-scale see-all-card delay-1"
-              onClick={() => setCertsExpanded(!certsExpanded)}
+            <motion.div 
+              layout
+              className="cert-card-wrapper"
+              transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
             >
-              <span className="see-all-icon">
-                {certsExpanded ? "↑" : "+"}
-              </span>
-              <h3 className="see-all-title">
-                {certsExpanded ? "Show Less" : `See All (${certifications.length - 7} More)`}
-              </h3>
-              <p className="see-all-desc">
-                {certsExpanded ? "Collapse certificates list" : "Expand all professional credentials"}
-              </p>
-            </div>
+              <div 
+                className="cert-card reveal-scale see-all-card delay-1"
+                onClick={() => setCertsExpanded(!certsExpanded)}
+              >
+                <span className="see-all-icon">
+                  {certsExpanded ? "↑" : "+"}
+                </span>
+                <h3 className="see-all-title">
+                  {certsExpanded ? "Show Less" : `See All (${certifications.length - 7} More)`}
+                </h3>
+                <p className="see-all-desc">
+                  {certsExpanded ? "Collapse certificates list" : "Expand all professional credentials"}
+                </p>
+              </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
       </section>
 
