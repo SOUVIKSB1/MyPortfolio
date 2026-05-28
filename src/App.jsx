@@ -1108,13 +1108,13 @@ export default function App() {
         <div className="logo">&lt; Souvik ./ &gt;</div>
         <ul className={`nav-links${menuOpen ? " active" : ""}`}>
           <li><a href="#home"           onClick={() => setMenuOpen(false)}>RETURN (0)</a></li>
-          <li><a href="#about"          onClick={() => setMenuOpen(false)}>PRINTF()</a></li>
-          <li><a href="#services"       onClick={() => setMenuOpen(false)}>FUNCTION()</a></li>
-          <li><a href="#projects"       onClick={() => setMenuOpen(false)}>BUILD()</a></li>
+          <li><a href="#about"          onClick={() => setMenuOpen(false)}>PRINTF ()</a></li>
+          <li><a href="#services"       onClick={() => setMenuOpen(false)}>FUNCTION ()</a></li>
+          <li><a href="#projects"       onClick={() => setMenuOpen(false)}>BUILD ()</a></li>
           <li><a href="#experience"     onClick={() => setMenuOpen(false)}>WHILE (LEARNING)</a></li>
-          <li><a href="#certifications" onClick={() => setMenuOpen(false)}>CERTIFICATE()</a></li>
-          <li><a href="#feedback"       onClick={() => setMenuOpen(false)}>FEEDBACK()</a></li>
-          <li><a href="#contact"        onClick={() => setMenuOpen(false)}>PING()</a></li>
+          <li><a href="#certifications" onClick={() => setMenuOpen(false)}>CREDENTIALS []</a></li>
+          <li><a href="#feedback"       onClick={() => setMenuOpen(false)}>REPUTATION ++</a></li>
+          <li><a href="#contact"        onClick={() => setMenuOpen(false)}>PING ()</a></li>
         </ul>
         <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
