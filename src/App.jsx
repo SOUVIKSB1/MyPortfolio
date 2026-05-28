@@ -361,8 +361,59 @@ function useScrollReveal(shouldRender, certsExpanded, projectsExpanded, services
 
 
 /* ═══════════════════════════════════
-   APP COMPONENT
+   COUNTER TICKER COMPONENT
+   Counts up from 0 to value when visible
 ═══════════════════════════════════ */
+function CounterTicker({ value, duration = 1200, suffix = "" }) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const elementRef = useRef(null);
+  const target = parseInt(value, 10);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.IntersectionObserver) {
+      setStarted(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started || isNaN(target)) return;
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [started, target, duration]);
+
+  if (isNaN(target)) return <span>{value}</span>;
+  return <span ref={elementRef}>{count}{suffix}</span>;
+}
+
+
+/* ═══════════════════════════════════
+   APP COMPONENT
+   ═══════════════════════════════════ */
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
@@ -492,6 +543,12 @@ export default function App() {
     "icon": "🤖"
   }
   ];
+
+  // Skills lists aligned with certifications and experience
+  const languagesList = ["Python", "Java", "TypeScript", "JavaScript", "C++", "HTML5", "CSS3"];
+  const frameworksList = ["React", "Node.js", "Express", "MongoDB", "PostgreSQL", "Next.js", "VHDL"];
+  const cloudList = ["GCP", "Azure", "Docker", "Kubernetes", "Vertex AI", "Generative AI", "CI/CD Pipelines", "Git"];
+  const totalTechCount = languagesList.length + frameworksList.length + cloudList.length;
 
   // Default reviews
   const defaultReviews = [
@@ -672,17 +729,10 @@ export default function App() {
   const [instagramCount, setInstagramCount] = useState(1043);
   const [syncStatus, setSyncStatus] = useState("Syncing with live API...");
   const [lastUpdated, setLastUpdated] = useState("just now");
-  const [activeSkillTab, setActiveSkillTab] = useState("weapons");
   const [certsExpanded, setCertsExpanded] = useState(false);
   const [projectsExpanded, setProjectsExpanded] = useState(false);
   const [servicesExpanded, setServicesExpanded] = useState(false);
 
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(max-width: 768px)").matches;
-    }
-    return false;
-  });
   const canvasRef = useRef(null);
   const cardWrapperRef = useRef(null);
 
@@ -690,13 +740,6 @@ export default function App() {
 
   useThreeConstellation(canvasRef, shouldRenderMain);
   useScrollReveal(shouldRenderMain, certsExpanded, projectsExpanded, servicesExpanded);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 768px)");
-    const handler = (e) => setIsMobile(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
 
   useEffect(() => {
     async function fetchCounts() {
@@ -1290,12 +1333,12 @@ export default function App() {
           <div className="about-right-col">
             <div className="stats-grid">
               {[
-                { num: `${projects.length}`,       label: "Projects" },
-                { num: dynamicBtechYear,           label: "Year B.Tech" },
-                { num: "10+",                      label: "Technologies" },
-                { num: `${certifications.length}`, label: "Certifications" },
-                { num: "∞",                        label: "Curiosity" },
-                { num: "01",                       label: dynamicMissionLabel },
+                { num: <CounterTicker value={projects.length} suffix="+" />,       label: "Projects" },
+                { num: dynamicBtechYear,                                           label: "Year B.Tech" },
+                { num: <CounterTicker value={totalTechCount} suffix="+" />,         label: "Technologies" },
+                { num: <CounterTicker value={certifications.length} suffix="+" />, label: "Certifications" },
+                { num: "∞",                                                        label: "Curiosity" },
+                { num: "01",                                                       label: dynamicMissionLabel },
               ].map((s, idx) => (
                 <div className={`stat-card reveal-scale delay-${(idx % 3) + 1}`} key={s.label}>
                   <h3>{s.num}</h3>
@@ -1304,56 +1347,32 @@ export default function App() {
               ))}
             </div>
 
-            {isMobile && (
-              <div className="skills-tabs-bar reveal-fade-up">
-                {[
-                  { id: "weapons", label: "Languages" },
-                  { id: "frameworks", label: "Frameworks" },
-                  { id: "cloud", label: "Cloud & DevOps" }
-                ].map((t) => (
-                  <button
-                    key={t.id}
-                    className={`skills-tab-btn ${activeSkillTab === t.id ? "active" : ""}`}
-                    onClick={() => setActiveSkillTab(t.id)}
-                  >
-                    {t.label}
-                  </button>
+            <div className="skills-category reveal-scale delay-2">
+              <h3>Secret Weapons</h3>
+              <div className="skills-list">
+                {languagesList.map((s) => (
+                  <span key={s}>{s}</span>
                 ))}
               </div>
-            )}
+            </div>
 
-            {(!isMobile || activeSkillTab === "weapons") && (
-              <div className="skills-category reveal-scale delay-2">
-                <h3>Secret Weapons</h3>
-                <div className="skills-list">
-                  {["Python", "TypeScript", "JavaScript", "C++", "HTML5", "CSS3"].map((s) => (
-                    <span key={s}>{s}</span>
-                  ))}
-                </div>
+            <div className="skills-category reveal-scale delay-3">
+              <h3>Frameworks &amp; Architecture</h3>
+              <div className="skills-list">
+                {frameworksList.map((s) => (
+                  <span key={s}>{s}</span>
+                ))}
               </div>
-            )}
+            </div>
 
-            {(!isMobile || activeSkillTab === "frameworks") && (
-              <div className="skills-category reveal-scale delay-3">
-                <h3>Frameworks &amp; Architecture</h3>
-                <div className="skills-list">
-                  {["React", "Node.js", "Express", "MongoDB", "PostgreSQL", "Next.js"].map((s) => (
-                    <span key={s}>{s}</span>
-                  ))}
-                </div>
+            <div className="skills-category reveal-scale delay-4">
+              <h3>Cloud, DevOps &amp; AI</h3>
+              <div className="skills-list">
+                {cloudList.map((s) => (
+                  <span key={s}>{s}</span>
+                ))}
               </div>
-            )}
-
-            {(!isMobile || activeSkillTab === "cloud") && (
-              <div className="skills-category reveal-scale delay-4">
-                <h3>Cloud, DevOps &amp; AI</h3>
-                <div className="skills-list">
-                  {["GCP", "Docker", "Kubernetes", "Vertex AI", "CI/CD Pipelines", "Git"].map((s) => (
-                    <span key={s}>{s}</span>
-                  ))}
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
