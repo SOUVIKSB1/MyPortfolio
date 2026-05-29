@@ -970,8 +970,8 @@ export default function App() {
       title: "Clinic OS",
       description: "A comprehensive clinic management system with appointment booking, patient records, and real-time medical billing analytics.",
       tech: "React · Node.js · MongoDB",
-      github: "https://github.com/SOUVIKSB1/clinic-os",
-      live: "https://clinic-os-demo.vercel.app",
+      github: "https://github.com/SOUVIKSB1/CLINIC_OS",
+      live: "https://clinic-os-gamma-one.vercel.app/",
     },
     {
       icon: "💰",
