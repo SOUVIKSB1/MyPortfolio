@@ -4,6 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        const mobileUrl = "https://my-portfolio-mobile.vercel.app/";
+
+        function checkRedirect() {
+          const urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.get('redirect') === 'false') return;
+
+          if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.location.replace(mobileUrl);
+          }
+        }
+
+        // Check on initial load
+        checkRedirect();
+
+        // Listen for resizing to mobile breakpoint dynamically
+        let isMobile = window.innerWidth <= 768;
+        window.addEventListener('resize', function() {
+          const nowMobile = window.innerWidth <= 768;
+          if (nowMobile !== isMobile) {
+            isMobile = nowMobile;
+            checkRedirect();
+          }
+        });
+      })();
+    </script>
     <title>Souvik Sinhababu | Software Engineer Portfolio</title>
     <meta
       name="description"
