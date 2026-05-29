@@ -987,7 +987,7 @@ export default function App() {
       description: "An artificial intelligence solver implementing search algorithms (such as A* Search with Manhattan distance heuristics) to solve the 8-puzzle game.",
       tech: "Python · AI Heuristics · Algorithms",
       github: "https://github.com/SOUVIKSB1/8_Puzzle",
-      live: "https://github.com/SOUVIKSB1/8_Puzzle",
+      live: "https://eight-puzzle-1swc.onrender.com/",
     },
     {
       icon: "⚙️",
