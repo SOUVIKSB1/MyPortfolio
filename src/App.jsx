@@ -974,6 +974,14 @@ export default function App() {
       live: "https://clinic-os-gamma-one.vercel.app/",
     },
     {
+      icon: "💎",
+      title: "Swarnika",
+      description: "A full-stack e-commerce solution designed for premium retail experiences, offering secure user management, dynamic product catalogs, and efficient transaction handling.",
+      tech: "HTML-CSS · Node.js · MongoDB · Firebase",
+      github: "https://github.com/SOUVIKSB1/Swarnika",
+      live: "https://swarnika-lemon.vercel.app/login"
+}
+    {
       icon: "💰",
       title: "PiggyBank Tracker",
       description: "An interactive online expense tracker that manages personal finance transactions, categories, and visualizes spending trends.",
