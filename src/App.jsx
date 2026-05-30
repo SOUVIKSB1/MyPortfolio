@@ -1019,7 +1019,7 @@ export default function App() {
       description: "Futuristic modern calculator web app featuring theme change, converter, voice input, sound, & AI enabled.",
       tech: "JavaScript · HTML5 · CSS3",
       github: "https://github.com/SOUVIKSB1/Calculator-V-3.0",
-      live: "https://souviksb1.github.io/Calculator-V-3.0",
+      live: "https://calculator-v-3-0.vercel.app/",
     },
     {
       icon: "🧮",
