@@ -980,7 +980,7 @@ export default function App() {
       tech: "HTML-CSS · Node.js · MongoDB · Firebase",
       github: "https://github.com/SOUVIKSB1/Swarnika",
       live: "https://swarnika-lemon.vercel.app/login"
-}
+    },
     {
       icon: "💰",
       title: "PiggyBank Tracker",
