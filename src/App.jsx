@@ -976,7 +976,7 @@ export default function App() {
     {
       icon: "💎",
       title: "Swarnika",
-      description: "A full-stack e-commerce solution designed for premium retail experiences, offering secure user management, dynamic product catalogs, and efficient transaction handling.",
+      description: "A full-stack e-commerce solution designed for premium retail experiences, offering secure management, dynamic product catalogs.",
       tech: "HTML-CSS · Node.js · MongoDB · Firebase",
       github: "https://github.com/SOUVIKSB1/Swarnika",
       live: "https://swarnika-lemon.vercel.app/login"
@@ -1014,12 +1014,28 @@ export default function App() {
       live: "https://souviksb1.github.io/CBT-CIP",
     },
     {
-      icon: "🧮",
-      title: "Calculator Web Suite",
-      description: "A responsive modern calculator web app featuring dark theme styles, precise layouts, and advanced arithmetic operations.",
+      icon: "🫟",
+      title: "Calculator Web V 3.0",
+      description: "Futuristic modern calculator web app featuring theme change, converter, voice input, sound, & AI enabled.",
       tech: "JavaScript · HTML5 · CSS3",
       github: "https://github.com/SOUVIKSB1/Calculator-V-3.0",
       live: "https://souviksb1.github.io/Calculator-V-3.0",
+    },
+    {
+      icon: "🧮",
+      title: "Calculator Web V2.0",
+      description: "A Scientific calculator web app featuring dark theme styles, precise layouts, and advanced arithmetic operations.",
+      tech: "JavaScript · HTML5 · CSS3",
+      github: "https://github.com/SOUVIKSB1/Calculator-V-2.0",
+      live: "https://souviksb1.github.io/Calculator-V-2.0/",
+    },
+    {
+      icon: "⛓️‍💥",
+      title: "Calculator Web V1.0",
+      description: "A responsive basic calculator web app featuring dark theme styles, precise layouts, and advanced arithmetic operations.",
+      tech: "JavaScript · HTML5 · CSS3",
+      github: "https://github.com/SOUVIKSB1/Calculator-V-1.0",
+      live: "https://souviksb1.github.io/Calculator-V-1.0/",
     },
   ];
 
