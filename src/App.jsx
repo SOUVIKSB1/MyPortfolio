@@ -644,8 +644,8 @@ export default function App() {
   ];
 
   // Skills lists aligned with certifications and experience
-  const languagesList = ["Python", "Java", "TypeScript", "JavaScript", "C++", "HTML5", "CSS3"];
-  const frameworksList = ["React", "Node.js", "Express", "MongoDB", "PostgreSQL", "Next.js", "VHDL"];
+  const languagesList = ["Python", "Java", "C", "JavaScript", "C++", "HTML5", "CSS3"];
+  const frameworksList = ["React", "Node.js", "Express", "MongoDB", "SQL", "Next.js", "VHDL"];
   const cloudList = ["GCP", "Azure", "Docker", "Kubernetes", "Vertex AI", "Generative AI", "CI/CD Pipelines", "Git"];
   const totalTechCount = languagesList.length + frameworksList.length + cloudList.length;
 
@@ -1106,16 +1106,22 @@ export default function App() {
       description: "Studying core computer science principles: Algorithms, Database Management Systems, System Architecture, and Software Engineering. Building cloud and full-stack projects.",
     },
     {
-      date: "2024 - 2025",
-      title: "Cloud Development & DevOps Projects",
-      institution: "Personal & Academic Projects",
-      description: "Architected CI/CD pipelines on GCP, deployed microservices to Kubernetes/GKE, and worked on containerized applications. Earned Google Cloud training certifications.",
+      date: "2021 - 2022",
+      title: "Educational Preparation",
+      institution: "Allen Career Institute - Kota, Rajasthan",
+      description: "Intensive preparation for entrance exams with a focus on problem-solving, conceptual clarity, and time management. 2 years classroom program.",
     },
     {
-      date: "2023 - 2024",
-      title: "Full-Stack Development Specialist",
-      institution: "Open-source & Freelance",
-      description: "Designed responsive user interfaces using React, built robust RESTful API servers in Node.js/Express, and engineered scalable database schemas with MongoDB and PostgreSQL.",
+      date: "2019 - 2020",
+      title: "Higher Secondary Education",
+      institution: "Kenduadihi High School - Bankura, West Bengal",
+      description: "Achieved 459 out of 500 marks ( 91.8 % ). Subject combination : P_C_M_B",
+    },
+    {
+      date: "2018",
+      title: "Secondary Education ( Madhyamik )",
+      institution: "Kenduadihi High School - Bankura, West Bengal",
+      description: "Achieved 645 out of 700 marks ( 92.14 % ).",
     },
   ];
 
