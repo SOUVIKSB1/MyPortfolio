@@ -51,6 +51,16 @@ const reviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model('Review', reviewSchema);
 
+// Visitor Counter Schema & Model (shared with mobile portfolio via same MongoDB cluster)
+const visitorSchema = new mongoose.Schema({
+  key: { type: String, default: 'portfolio_visits', unique: true },
+  count: { type: Number, default: 0 }
+});
+const Visitor = mongoose.model('Visitor', visitorSchema);
+
+// Memory fallback for visit count
+let memoryVisitCount = 0;
+
 // Memory database fallback if MongoDB URI is not provided or fails to connect
 let memoryReviews = [
   {
@@ -119,6 +129,46 @@ app.post('/api/reviews', async (req, res) => {
   } catch (err) {
     console.error('Error saving review:', err);
     res.status(500).json({ error: 'Failed to submit review' });
+  }
+});
+
+// --- Visitor Counter Endpoints ---
+
+// GET /api/visits — return current total visit count
+app.get('/api/visits', async (req, res) => {
+  try {
+    const isDbConnected = mongoose.connection.readyState === 1;
+    if (isDbConnected) {
+      let doc = await Visitor.findOne({ key: 'portfolio_visits' });
+      if (!doc) doc = await Visitor.create({ key: 'portfolio_visits', count: 0 });
+      return res.json({ count: doc.count });
+    } else {
+      return res.json({ count: memoryVisitCount });
+    }
+  } catch (err) {
+    console.error('Error fetching visits:', err);
+    res.status(500).json({ error: 'Failed to fetch visit count' });
+  }
+});
+
+// POST /api/visits — increment count by 1 and return new total
+app.post('/api/visits', async (req, res) => {
+  try {
+    const isDbConnected = mongoose.connection.readyState === 1;
+    if (isDbConnected) {
+      const doc = await Visitor.findOneAndUpdate(
+        { key: 'portfolio_visits' },
+        { $inc: { count: 1 } },
+        { new: true, upsert: true }
+      );
+      return res.json({ count: doc.count });
+    } else {
+      memoryVisitCount += 1;
+      return res.json({ count: memoryVisitCount });
+    }
+  } catch (err) {
+    console.error('Error incrementing visits:', err);
+    res.status(500).json({ error: 'Failed to increment visit count' });
   }
 });
 

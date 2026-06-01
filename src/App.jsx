@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Mail, ExternalLink, Download, Menu, X } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEye } from "react-icons/fa";
 import * as THREE from "three";
 import { motion, AnimatePresence } from "framer-motion";
 import StartAnimation from "./components/StartAnimation";
@@ -826,6 +826,7 @@ export default function App() {
   const [typingText, setTypingText] = useState("");
   const [linkedinCount, setLinkedinCount] = useState(1481);
   const [instagramCount, setInstagramCount] = useState(1043);
+  const [visitCount, setVisitCount] = useState(null);
   const [syncStatus, setSyncStatus] = useState("Syncing with live API...");
   const [lastUpdated, setLastUpdated] = useState("just now");
   const [certsExpanded, setCertsExpanded] = useState(false);
@@ -854,6 +855,14 @@ export default function App() {
       }
     }
     fetchCounts();
+  }, []);
+
+  // Fetch & increment portfolio visit count on mount (shared MongoDB counter with mobile version)
+  useEffect(() => {
+    fetch('/api/visits', { method: 'POST' })
+      .then((r) => r.json())
+      .then((data) => setVisitCount(data.count))
+      .catch(() => setVisitCount('—'));
   }, []);
 
   useEffect(() => {
@@ -1614,6 +1623,20 @@ export default function App() {
                   </div>
                   <div className="metric-pulse-glow ig-glow" />
                 </a>
+
+                {/* Portfolio Visits — shared counter with mobile version */}
+                <div className="live-metric-box">
+                  <div className="metric-icon visits-brand">
+                    <FaEye size={20} />
+                  </div>
+                  <div className="metric-info">
+                    <span className="metric-label">Portfolio Visits</span>
+                    <h4 className="metric-value ticker-val">
+                      {visitCount === null ? "…" : typeof visitCount === "number" ? visitCount.toLocaleString() : visitCount}
+                    </h4>
+                  </div>
+                  <div className="metric-pulse-glow visits-glow" />
+                </div>
               </div>
 
               <div className="live-footer">
