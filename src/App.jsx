@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Mail, ExternalLink, Download, Menu, X } from "lucide-react";
-import { FaGithub, FaLinkedin, FaEye } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEye, FaStar } from "react-icons/fa";
 import * as THREE from "three";
 import { motion, AnimatePresence } from "framer-motion";
 import StartAnimation from "./components/StartAnimation";
@@ -827,6 +827,7 @@ export default function App() {
   const [linkedinCount, setLinkedinCount] = useState(1481);
   const [instagramCount, setInstagramCount] = useState(1043);
   const [visitCount, setVisitCount] = useState(null);
+  const [reviewCount, setReviewCount] = useState(null);
   const [syncStatus, setSyncStatus] = useState("Syncing with live API...");
   const [lastUpdated, setLastUpdated] = useState("just now");
   const [certsExpanded, setCertsExpanded] = useState(false);
@@ -863,6 +864,14 @@ export default function App() {
       .then((r) => r.json())
       .then((data) => setVisitCount(data.count))
       .catch(() => setVisitCount('—'));
+  }, []);
+
+  // Fetch total review count on mount
+  useEffect(() => {
+    fetch('/api/reviews/count')
+      .then((r) => r.json())
+      .then((data) => setReviewCount(data.count))
+      .catch(() => setReviewCount('—'));
   }, []);
 
   useEffect(() => {
@@ -1636,6 +1645,20 @@ export default function App() {
                     </h4>
                   </div>
                   <div className="metric-pulse-glow visits-glow" />
+                </div>
+
+                {/* Total Reviews — live count from shared MongoDB */}
+                <div className="live-metric-box">
+                  <div className="metric-icon reviews-brand">
+                    <FaStar size={20} />
+                  </div>
+                  <div className="metric-info">
+                    <span className="metric-label">Total Reviews</span>
+                    <h4 className="metric-value ticker-val">
+                      {reviewCount === null ? "…" : typeof reviewCount === "number" ? reviewCount.toLocaleString() : reviewCount}
+                    </h4>
+                  </div>
+                  <div className="metric-pulse-glow reviews-glow" />
                 </div>
               </div>
 

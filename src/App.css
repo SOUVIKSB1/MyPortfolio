@@ -2216,6 +2216,7 @@ body {
 .ln-glow { background: #0a66c2; }
 .ig-glow { background: #e1306c; }
 .visits-glow { background: #10b981; }
+.reviews-glow { background: #a855f7; }
 
 .visits-brand {
   background: rgba(16, 185, 129, 0.1);
@@ -2223,8 +2224,18 @@ body {
   color: #10b981;
 }
 
+.reviews-brand {
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  color: #a855f7;
+}
+
 .live-metric-box:has(.visits-brand) .metric-value {
   color: #10b981;
+}
+
+.live-metric-box:has(.reviews-brand) .metric-value {
+  color: #a855f7;
 }
 
 .live-metric-box:hover .metric-pulse-glow {

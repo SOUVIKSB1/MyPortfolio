@@ -132,6 +132,22 @@ app.post('/api/reviews', async (req, res) => {
   }
 });
 
+// GET /api/reviews/count — total review count
+app.get('/api/reviews/count', async (req, res) => {
+  try {
+    const isDbConnected = mongoose.connection.readyState === 1;
+    if (isDbConnected) {
+      const count = await Review.countDocuments();
+      return res.json({ count });
+    } else {
+      return res.json({ count: memoryReviews.length });
+    }
+  } catch (err) {
+    console.error('Error counting reviews:', err);
+    res.status(500).json({ error: 'Failed to count reviews' });
+  }
+});
+
 // --- Visitor Counter Endpoints ---
 
 // GET /api/visits — return current total visit count
