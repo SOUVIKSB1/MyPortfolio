@@ -1000,6 +1000,14 @@ export default function App() {
       live: "https://swarnika-lemon.vercel.app/login"
     },
     {
+      icon: "💳",
+      title: "PayURupee",
+      description: "A secure digital e-wallet system with hashed UPI PIN authentication, real-time transfers, scheduled payments, and category breakdowns.",
+      tech: "HTML5 · CSS3 · JS · Node.js · MongoDB",
+      github: "https://github.com/SOUVIKSB1/PayURupee",
+      live: "https://pay-u-rupee.vercel.app"
+    },
+    {
       icon: "💰",
       title: "PiggyBank Tracker",
       description: "An interactive online expense tracker that manages personal finance transactions, categories, and visualizes spending trends.",
