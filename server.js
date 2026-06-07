@@ -4,7 +4,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import https from 'https';
 
 // Load environment variables
 dotenv.config();
@@ -19,11 +18,6 @@ const __dirname = path.dirname(__filename);
 // Middleware
 app.use(cors());
 app.use(express.json());
-
-// Ping route for keeping server awake
-app.get('/ping', (req, res) => {
-  res.status(200).send('pong');
-});
 
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -198,17 +192,4 @@ app.get('/*splat', (req, res) => {
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-
-  // Self-ping to prevent Render spinning down due to inactivity
-  const RENDER_URL = process.env.RENDER_EXTERNAL_URL;
-  if (RENDER_URL) {
-    console.log(`Self-ping configured for URL: ${RENDER_URL}`);
-    setInterval(() => {
-      https.get(`${RENDER_URL}/ping`, (res) => {
-        console.log(`Self-ping status: ${res.statusCode} at ${new Date().toISOString()}`);
-      }).on('error', (err) => {
-        console.error('Self-ping failed:', err.message);
-      });
-    }, 14 * 60 * 1000); // 14 minutes
-  }
 });
