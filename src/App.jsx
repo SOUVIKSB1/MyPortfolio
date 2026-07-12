@@ -522,6 +522,62 @@ export default function App() {
   // Certifications list
   const certifications = [
     {
+    "title": "Prompt Engineering Foundation",
+    "issuer": "Cognizant",
+    "date": "JUL 2026",
+    "id": "CS-PEF",
+    "link": "/certificates/prompt_engineering_foundation.pdf",
+    "icon": "✍️"
+  },
+  {
+    "title": "ITPM - Introduction to Agile [101-Basics]",
+    "issuer": "Cognizant",
+    "date": "JUL 2026",
+    "id": "CS-ITPM",
+    "link": "/certificates/itpm_introduction_to_agile.pdf",
+    "icon": "🔄"
+  },
+  {
+    "title": "GitHub Copilot Fundamentals Virtual Training",
+    "issuer": "Cognizant",
+    "date": "JUL 2026",
+    "id": "CS-GHCF",
+    "link": "/certificates/github_copilot_fundamentals.pdf",
+    "icon": "🐙"
+  },
+  {
+    "title": "Introduction to Agentic AI",
+    "issuer": "Cognizant",
+    "date": "JUL 2026",
+    "id": "CS-IAAI",
+    "link": "/certificates/introduction_to_agentic_ai.pdf",
+    "icon": "🤖"
+  },
+  {
+    "title": "Fundamentals of Generative AI",
+    "issuer": "Cognizant",
+    "date": "JUL 2026",
+    "id": "CS-FGAI",
+    "link": "/certificates/fundamentals_of_generative_ai.pdf",
+    "icon": "✨"
+  },
+  {
+    "title": "Foundations of Modern AI",
+    "issuer": "Cognizant",
+    "date": "JUL 2026",
+    "id": "CS-FMAI",
+    "link": "/certificates/foundations_of_modern_ai.pdf",
+    "icon": "🧠"
+  },
+  {
+    "title": ".Net Backend Engineer",
+    "issuer": "Cognizant",
+    "date": "JUL 2026",
+    "id": "CS-NBE",
+    "link": "/certificates/dotnet_backend_engineer.pdf",
+    "icon": "🖥️"
+  },
+  {
     "title": "Azure AI Fundamentals (AI-900) - Microsoft Certified",
     "issuer": "Microsoft",
     "date": "APR 2026",
