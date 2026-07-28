@@ -898,6 +898,7 @@ export default function App() {
   const [projectsExpanded, setProjectsExpanded] = useState(false);
   const [servicesExpanded, setServicesExpanded] = useState(false);
   const [activeProjectTab, setActiveProjectTab] = useState("projects");
+  const [viewingCert, setViewingCert] = useState(null);
 
   const canvasRef = useRef(null);
   const cardWrapperRef = useRef(null);
@@ -1984,9 +1985,19 @@ export default function App() {
                         </a>
                       )}
                       {p.live && (
-                        <a href={p.live} target="_blank" rel="noreferrer" aria-label={p.live.endsWith(".pdf") ? "View Certificate" : "View Project"}>
-                          <ExternalLink size={14} /> {p.live.endsWith(".pdf") ? "Certificate" : "Project"}
-                        </a>
+                        p.live.endsWith(".pdf") ? (
+                          <button 
+                            className="cert-action-btn"
+                            onClick={() => setViewingCert(p.live)}
+                            aria-label="View Certificate"
+                          >
+                            <ExternalLink size={14} /> Certificate
+                          </button>
+                        ) : (
+                          <a href={p.live} target="_blank" rel="noreferrer" aria-label="View Project">
+                            <ExternalLink size={14} /> Project
+                          </a>
+                        )
                       )}
                     </div>
                   </div>
@@ -2113,9 +2124,19 @@ export default function App() {
                     <p className="cert-issuer">{c.issuer}</p>
                     <div className="cert-footer">
                       <span className="cert-id">ID: {c.id}</span>
-                      <a href={c.link} target="_blank" rel="noreferrer" className="cert-link-btn">
-                        Verify <ExternalLink size={12} />
-                      </a>
+                      {c.link.includes(".pdf") ? (
+                        <button 
+                          className="cert-link-btn" 
+                          onClick={() => setViewingCert(c.link)}
+                          aria-label="Verify Certificate"
+                        >
+                          Verify <ExternalLink size={12} />
+                        </button>
+                      ) : (
+                        <a href={c.link} target="_blank" rel="noreferrer" className="cert-link-btn">
+                          Verify <ExternalLink size={12} />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -2290,6 +2311,52 @@ export default function App() {
         <span className="logo-sm">&lt; Souvik ./ &gt;</span>
         <span>© 2026 Souvik Sinhababu · Built with Love &amp; Passion</span>
       </footer>
+
+      {/* ── CERTIFICATE MODAL ── */}
+      <AnimatePresence>
+        {viewingCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="cert-modal-overlay"
+            onClick={() => setViewingCert(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="cert-modal-content glass-panel"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="cert-modal-header">
+                <h3>Certificate Viewer</h3>
+                <button className="cert-close-btn" onClick={() => setViewingCert(null)}>
+                  <X size={18} />
+                </button>
+              </div>
+              <div className="cert-modal-body">
+                <iframe
+                  src={`${viewingCert}#toolbar=0&navpanes=0`}
+                  title="Certificate PDF"
+                  width="100%"
+                  height="100%"
+                />
+              </div>
+              <div className="cert-modal-footer">
+                <a
+                  href={viewingCert}
+                  download
+                  className="btn-primary"
+                  style={{ display: "inline-flex", alignItems: "center", gap: "8px", textDecoration: "none" }}
+                >
+                  <Download size={14} /> Download PDF
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
       )}
     </>
