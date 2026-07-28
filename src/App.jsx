@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Mail, ExternalLink, Download, Menu, X } from "lucide-react";
+import { Mail, ExternalLink, Download, Menu, X, Briefcase, FolderOpen } from "lucide-react";
 import { FaGithub, FaLinkedin, FaEye, FaStar } from "react-icons/fa";
 import * as THREE from "three";
 import { motion, AnimatePresence } from "framer-motion";
