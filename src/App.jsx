@@ -1130,6 +1130,22 @@ export default function App() {
     },
   ];
 
+  const internships = [
+    {
+      icon: "☁️",
+      title: "Data Engineering Virtual Internship",
+      company: "EduSkills (AWS Academy)",
+      description: "Completed an intensive 8-week virtual internship in Data Engineering. Managed relational database schema designs, cloud data warehouses, serverless pipelines, and ETL processing workflows using the AWS Academy curriculum. Supported by AICTE, Ministry of Education.",
+      tech: "AWS Academy · Data Engineering · Cloud DBMS · ETL",
+      github: "",
+      live: "/certificates/data_engineering_virtual_internship.pdf",
+      duration: "June - August 2026",
+      grade: "O (Outstanding)",
+      certId: "4597a1ded345be899574",
+      studentId: "STU65fdd1992c2d11711133081"
+    }
+  ];
+
 
   const services = [
     {
