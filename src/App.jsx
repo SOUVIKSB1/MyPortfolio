@@ -1132,6 +1132,16 @@ export default function App() {
 
   const internships = [
     {
+      icon: "🔬",
+      title: "Research Intern",
+      company: "IIT Roorkee (IITR)",
+      description: "Developing an end-to-end deep learning system for Railway Track Fault Detection. Implementing transfer learning models using EfficientNetV2B0 with TensorFlow/Keras to achieve high-recall safety-critical classifications, served via a Gradio dashboard interface.",
+      tech: "TensorFlow · Keras · EfficientNetV2 · Gradio · Python · Computer Vision",
+      github: "https://github.com/SOUVIKSB1/Railway_Track_Fault_Detection",
+      live: "https://github.com/SOUVIKSB1/Railway_Track_Fault_Detection",
+      duration: "July 2026 - Present (Ongoing)"
+    },
+    {
       icon: "☁️",
       title: "Data Engineering Virtual Internship",
       company: "EduSkills (AWS Academy)",
@@ -1139,7 +1149,7 @@ export default function App() {
       tech: "AWS Academy · Data Engineering · Cloud DBMS · ETL",
       github: "",
       live: "/certificates/data_engineering_virtual_internship.pdf",
-      duration: "June - August 2026",
+      duration: "June - August 2026 (Completed)",
       grade: "O (Outstanding)",
       certId: "4597a1ded345be899574",
       studentId: "STU65fdd1992c2d11711133081"
@@ -1952,8 +1962,8 @@ export default function App() {
                     <p>{p.description}</p>
                     <div className="internship-meta">
                       <span className="meta-badge">📅 {p.duration}</span>
-                      <span className="meta-badge">🏆 Grade: {p.grade}</span>
-                      <span className="meta-badge font-mono">ID: {p.certId}</span>
+                      {p.grade && <span className="meta-badge">🏆 Grade: {p.grade}</span>}
+                      {p.certId && <span className="meta-badge font-mono">ID: {p.certId}</span>}
                     </div>
                     <span className="proj-tech">{p.tech}</span>
                     <div className="project-links">
@@ -1963,8 +1973,8 @@ export default function App() {
                         </a>
                       )}
                       {p.live && (
-                        <a href={p.live} target="_blank" rel="noreferrer" aria-label="View Certificate">
-                          <ExternalLink size={14} /> Certificate
+                        <a href={p.live} target="_blank" rel="noreferrer" aria-label={p.live.endsWith(".pdf") ? "View Certificate" : "View Project"}>
+                          <ExternalLink size={14} /> {p.live.endsWith(".pdf") ? "Certificate" : "Project"}
                         </a>
                       )}
                     </div>
