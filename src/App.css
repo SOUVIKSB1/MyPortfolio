@@ -2780,3 +2780,76 @@ body {
     cursor: none !important;
   }
 }
+
+/* ── PROJECTS TAB BAR & INTERNSHIP META ── */
+.projects-tab-bar {
+  display: inline-flex;
+  background: rgba(10, 14, 24, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 30px;
+  padding: 4px;
+  margin: 20px auto 40px auto;
+  gap: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.projects-tab-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 24px;
+  border-radius: 25px;
+  cursor: none !important; /* using custom cursor */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projects-tab-btn:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.projects-tab-btn.active {
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+}
+
+.proj-company {
+  font-family: var(--font-head);
+  font-size: 13.5px;
+  color: var(--accent);
+  margin-top: -6px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.internship-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.meta-badge {
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+}
+
+.meta-badge.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}

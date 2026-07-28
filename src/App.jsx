@@ -1859,46 +1859,104 @@ export default function App() {
       <section className="projects-section" id="projects">
         <div className="section-label reveal-fade-up">Work</div>
         <h2 className="section-title reveal-title">
-          Featured <span className="gradient-text">Projects</span>
+          Featured <span className="gradient-text">Projects &amp; Experience</span>
         </h2>
+
+        {/* Tab switchers */}
+        <div className="projects-tab-bar reveal-fade-up">
+          <button 
+            className={`projects-tab-btn ${activeProjectTab === "projects" ? "active" : ""}`}
+            onClick={() => setActiveProjectTab("projects")}
+          >
+            <FolderOpen size={16} />
+            Projects
+          </button>
+          <button 
+            className={`projects-tab-btn ${activeProjectTab === "internships" ? "active" : ""}`}
+            onClick={() => setActiveProjectTab("internships")}
+          >
+            <Briefcase size={16} />
+            Internships
+          </button>
+        </div>
 
         <motion.div layout className="project-grid">
           <AnimatePresence mode="popLayout">
-            {(projectsExpanded ? projects : projects.slice(0, 7)).map((p, i) => {
-              const isCollapsible = i >= 7;
-              return (
+            {activeProjectTab === "projects" ? (
+              (projectsExpanded ? projects : projects.slice(0, 7)).map((p, i) => {
+                const isCollapsible = i >= 7;
+                return (
+                  <motion.div
+                    layout
+                    key={p.title}
+                    className="project-card-wrapper"
+                    {...(isCollapsible ? {
+                      custom: i,
+                      variants: projectVariants,
+                      initial: "hidden",
+                      animate: "visible",
+                      exit: "exit"
+                    } : {})}
+                    transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
+                  >
+                    <div className={`project-card ${isCollapsible ? "in" : "reveal-scale"}`}>
+                      <div className="proj-icon">{p.icon}</div>
+                      <h3>{p.title}</h3>
+                      <p>{p.description}</p>
+                      <span className="proj-tech">{p.tech}</span>
+                      <div className="project-links">
+                        {p.github && (
+                          <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                            <FaGithub size={14} /> GitHub
+                          </a>
+                        )}
+                        {p.live && (
+                          <a href={p.live} target="_blank" rel="noreferrer" aria-label="Live demo">
+                            <ExternalLink size={14} /> Live Demo
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })
+            ) : (
+              internships.map((p) => (
                 <motion.div
                   layout
                   key={p.title}
                   className="project-card-wrapper"
-                  {...(isCollapsible ? {
-                    custom: i,
-                    variants: projectVariants,
-                    initial: "hidden",
-                    animate: "visible",
-                    exit: "exit"
-                  } : {})}
                   transition={{ layout: { type: "spring", stiffness: 100, damping: 18, mass: 0.8 } }}
                 >
-                  <div className={`project-card ${isCollapsible ? "in" : "reveal-scale"}`}>
+                  <div className="project-card reveal-scale">
                     <div className="proj-icon">{p.icon}</div>
                     <h3>{p.title}</h3>
+                    {p.company && <h4 className="proj-company">{p.company}</h4>}
                     <p>{p.description}</p>
+                    <div className="internship-meta">
+                      <span className="meta-badge">📅 {p.duration}</span>
+                      <span className="meta-badge">🏆 Grade: {p.grade}</span>
+                      <span className="meta-badge font-mono">ID: {p.certId}</span>
+                    </div>
                     <span className="proj-tech">{p.tech}</span>
                     <div className="project-links">
-                      <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub">
-                        <FaGithub size={14} /> GitHub
-                      </a>
-                      <a href={p.live} target="_blank" rel="noreferrer" aria-label="Live demo">
-                        <ExternalLink size={14} /> Live Demo
-                      </a>
+                      {p.github && (
+                        <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                          <FaGithub size={14} /> GitHub
+                        </a>
+                      )}
+                      {p.live && (
+                        <a href={p.live} target="_blank" rel="noreferrer" aria-label="View Certificate">
+                          <ExternalLink size={14} /> Certificate
+                        </a>
+                      )}
                     </div>
                   </div>
                 </motion.div>
-              );
-            })}
+              ))
+            )}
           </AnimatePresence>
-          {projects.length > 7 && (
+          {activeProjectTab === "projects" && projects.length > 7 && (
             <motion.div 
               layout
               className="project-card-wrapper"
