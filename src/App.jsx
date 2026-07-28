@@ -1961,6 +1961,17 @@ export default function App() {
                     {p.company && <h4 className="proj-company">{p.company}</h4>}
                     <p>{p.description}</p>
                     <div className="internship-meta">
+                      {p.duration.includes("Ongoing") ? (
+                        <span className="status-badge ongoing">
+                          <span className="status-dot-glow" />
+                          Ongoing
+                        </span>
+                      ) : (
+                        <span className="status-badge completed">
+                          <span className="status-dot-circle" />
+                          Completed
+                        </span>
+                      )}
                       <span className="meta-badge">📅 {p.duration}</span>
                       {p.grade && <span className="meta-badge">🏆 Grade: {p.grade}</span>}
                       {p.certId && <span className="meta-badge font-mono">ID: {p.certId}</span>}
