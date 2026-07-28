@@ -2783,7 +2783,8 @@ body {
 
 /* ── PROJECTS TAB BAR & INTERNSHIP META ── */
 .projects-tab-bar {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   background: rgba(10, 14, 24, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 30px;
@@ -2791,9 +2792,6 @@ body {
   margin: 20px auto 40px auto;
   gap: 4px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .projects-tab-btn {
