@@ -341,7 +341,7 @@ function useThreeConstellation(canvasRef, shouldRender) {
 /* ═══════════════════════════════════
    SCROLL REVEAL HOOK
 ═══════════════════════════════════ */
-function useScrollReveal(shouldRender, certsExpanded, projectsExpanded, servicesExpanded) {
+function useScrollReveal(shouldRender, certsExpanded, projectsExpanded, servicesExpanded, activeProjectTab) {
   useEffect(() => {
     if (!shouldRender) return;
     const obs = new IntersectionObserver(
@@ -356,7 +356,7 @@ function useScrollReveal(shouldRender, certsExpanded, projectsExpanded, services
     );
     document.querySelectorAll(".reveal, .reveal-title, .reveal-text, .reveal-scale, .reveal-fade-up").forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, [shouldRender, certsExpanded, projectsExpanded, servicesExpanded]);
+  }, [shouldRender, certsExpanded, projectsExpanded, servicesExpanded, activeProjectTab]);
 }
 
 
@@ -897,6 +897,7 @@ export default function App() {
   const [certsExpanded, setCertsExpanded] = useState(false);
   const [projectsExpanded, setProjectsExpanded] = useState(false);
   const [servicesExpanded, setServicesExpanded] = useState(false);
+  const [activeProjectTab, setActiveProjectTab] = useState("projects");
 
   const canvasRef = useRef(null);
   const cardWrapperRef = useRef(null);
@@ -904,7 +905,7 @@ export default function App() {
   const shouldRenderMain = isExiting || !loading;
 
   useThreeConstellation(canvasRef, shouldRenderMain);
-  useScrollReveal(shouldRenderMain, certsExpanded, projectsExpanded, servicesExpanded);
+  useScrollReveal(shouldRenderMain, certsExpanded, projectsExpanded, servicesExpanded, activeProjectTab);
 
   useEffect(() => {
     async function fetchCounts() {
