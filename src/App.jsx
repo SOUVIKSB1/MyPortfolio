@@ -538,6 +538,46 @@ export default function App() {
       "icon": "☁️"
     },
     {
+      "title": "AICTE | IBM SkillsBuild Academic Internship - Data Analytics with AI | BharatCares",
+      "issuer": "AICTE • IBM SkillsBuild",
+      "date": "AUG 2026",
+      "id": "PLAN-D44A9C2C463C",
+      "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-D44A9C2C463C",
+      "icon": "📊"
+    },
+    {
+      "title": "Make Agentic AI Work for You",
+      "issuer": "IBM SkillsBuild",
+      "date": "AUG 2026",
+      "id": "PLAN-37BFD561DC25",
+      "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-37BFD561DC25",
+      "icon": "🤖"
+    },
+    {
+      "title": "Introduction to Retrieval-Augmented Generation (RAG)",
+      "issuer": "IBM SkillsBuild",
+      "date": "AUG 2026",
+      "id": "IBM-RAG-AI",
+      "link": "https://skills.yourlearning.ibm.com/",
+      "icon": "🔍"
+    },
+    {
+      "title": "Generative AI Essentials: Using LLMs to Work with Data",
+      "issuer": "IBM SkillsBuild",
+      "date": "AUG 2026",
+      "id": "PLAN-D0F12976D81A",
+      "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-D0F12976D81A",
+      "icon": "✨"
+    },
+    {
+      "title": "Getting Started with Data (Data Fundamentals)",
+      "issuer": "IBM SkillsBuild",
+      "date": "AUG 2026",
+      "id": "PLAN-14F2691E3A32",
+      "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-14F2691E3A32",
+      "icon": "📈"
+    },
+    {
       "title": "NPTEL Java Certification",
       "issuer": "IIT Kharagpur",
       "date": "NOV 2025",
