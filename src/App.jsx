@@ -519,8 +519,9 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Certifications list
+  // Certifications list - Ordered strictly by Industry Prestige, Rigor & Market Value
   const certifications = [
+    // ── TIER 1: FLAGSHIP GLOBAL CERTIFICATIONS & ACADEMIC INTERNSHIPS ──
     {
       "title": "Azure AI Fundamentals (AI-900) - Microsoft Certified",
       "issuer": "Microsoft",
@@ -546,6 +547,24 @@ export default function App() {
       "icon": "📊"
     },
     {
+      "title": "NPTEL Java Certification",
+      "issuer": "IIT Kharagpur",
+      "date": "NOV 2025",
+      "id": "NPTEL25CS110S460803974",
+      "link": "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs110/Course/NPTEL25CS110S46080397410888267.pdf",
+      "icon": "☕"
+    },
+    {
+      "title": "Data Base Management System",
+      "issuer": "IIT Kharagpur",
+      "date": "MAR 2026",
+      "id": "NPTEL26CS39S660101642",
+      "link": "https://nptel.ac.in/noc/E_Certificate/NOC26CS39S66010164203151734",
+      "icon": "💿"
+    },
+
+    // ── TIER 2: CUTTING-EDGE APPLIED AI, AGENTS & RAG ──
+    {
       "title": "Make Agentic AI Work for You",
       "issuer": "IBM SkillsBuild",
       "date": "AUG 2026",
@@ -562,60 +581,20 @@ export default function App() {
       "icon": "🔍"
     },
     {
+      "title": "Introduction to Agentic AI",
+      "issuer": "Cognizant",
+      "date": "JUL 2026",
+      "id": "CS-IAAI",
+      "link": "/certificates/introduction_to_agentic_ai.pdf",
+      "icon": "🤖"
+    },
+    {
       "title": "Generative AI Essentials: Using LLMs to Work with Data",
       "issuer": "IBM SkillsBuild",
       "date": "AUG 2026",
       "id": "PLAN-D0F12976D81A",
       "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-D0F12976D81A",
       "icon": "✨"
-    },
-    {
-      "title": "Getting Started with Data (Data Fundamentals)",
-      "issuer": "IBM SkillsBuild",
-      "date": "AUG 2026",
-      "id": "PLAN-14F2691E3A32",
-      "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-14F2691E3A32",
-      "icon": "📈"
-    },
-    {
-      "title": "NPTEL Java Certification",
-      "issuer": "IIT Kharagpur",
-      "date": "NOV 2025",
-      "id": "NPTEL25CS110S460803974",
-      "link": "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs110/Course/NPTEL25CS110S46080397410888267.pdf",
-      "icon": "☕"
-    },
-    {
-      "title": "Data Base Management System",
-      "issuer": "IIT Kharagpur",
-      "date": "MAR 2026",
-      "id": "NPTEL26CS39S660101642",
-      "link": "https://nptel.ac.in/noc/E_Certificate/NOC26CS39S66010164203151734",
-      "icon": "💿"
-    },
-    {
-      "title": "Supervised Machine Learning: Regression and Classification",
-      "issuer": "DeepLearning.AI",
-      "date": "MAR 2025",
-      "id": "B1DW0ZFLXWSV",
-      "link": "https://www.coursera.org/account/accomplishments/verify/B1DW0ZFLXWSV",
-      "icon": "🤖"
-    },
-    {
-      "title": "Google Cloud Fundamentals: Core Infrastructure",
-      "issuer": "Google Cloud",
-      "date": "NOV 2024",
-      "id": "13038962",
-      "link": "https://www.skills.google/public_profiles/16ea7d05-4436-4228-b43e-7f2bb2bfb07e/badges/13038962?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      "icon": "☁️"
-    },
-    {
-      "title": ".Net Backend Engineer",
-      "issuer": "Cognizant",
-      "date": "JUL 2026",
-      "id": "CS-NBE",
-      "link": "/certificates/dotnet_backend_engineer.pdf",
-      "icon": "🖥️"
     },
     {
       "title": "Prompt Engineering Foundation",
@@ -626,20 +605,54 @@ export default function App() {
       "icon": "✍️"
     },
     {
-      "title": "Introduction to Agentic AI",
-      "issuer": "Cognizant",
-      "date": "JUL 2026",
-      "id": "CS-IAAI",
-      "link": "/certificates/introduction_to_agentic_ai.pdf",
-      "icon": "🤖"
-    },
-    {
       "title": "Fundamentals of Generative AI",
       "issuer": "Cognizant",
       "date": "JUL 2026",
       "id": "CS-FGAI",
       "link": "/certificates/fundamentals_of_generative_ai.pdf",
       "icon": "✨"
+    },
+    {
+      "title": "Supervised Machine Learning: Regression and Classification",
+      "issuer": "DeepLearning.AI",
+      "date": "MAR 2025",
+      "id": "B1DW0ZFLXWSV",
+      "link": "https://www.coursera.org/account/accomplishments/verify/B1DW0ZFLXWSV",
+      "icon": "🤖"
+    },
+
+    // ── TIER 3: CLOUD, BACKEND ENGINEERING & DEV TOOLS ──
+    {
+      "title": ".Net Backend Engineer",
+      "issuer": "Cognizant",
+      "date": "JUL 2026",
+      "id": "CS-NBE",
+      "link": "/certificates/dotnet_backend_engineer.pdf",
+      "icon": "🖥️"
+    },
+    {
+      "title": "Google Cloud Fundamentals: Core Infrastructure",
+      "issuer": "Google Cloud",
+      "date": "NOV 2024",
+      "id": "13038962",
+      "link": "https://www.skills.google/public_profiles/16ea7d05-4436-4228-b43e-7f2bb2bfb07e/badges/13038962?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
+      "icon": "☁️"
+    },
+    {
+      "title": "GitHub Copilot Fundamentals Virtual Training",
+      "issuer": "Cognizant",
+      "date": "JUL 2026",
+      "id": "CS-GHCF",
+      "link": "/certificates/github_copilot_fundamentals.pdf",
+      "icon": "🐙"
+    },
+    {
+      "title": "Postman API Fundamentals Student Expert",
+      "issuer": "Postman",
+      "date": "OCT 2024",
+      "id": "P-APIFSE",
+      "link": "https://badgr.com/public/assertions/94n1wX7sQ3a1_QYdO-sTlw?identity__email=souviksinhababu88%40gmail.com",
+      "icon": "🚀"
     },
     {
       "title": "Foundations of Modern AI",
@@ -649,13 +662,31 @@ export default function App() {
       "link": "/certificates/foundations_of_modern_ai.pdf",
       "icon": "🧠"
     },
+
+    // ── TIER 4: STRATEGIC AI, DATA & DEVELOPMENT PRACTICES ──
     {
-      "title": "GitHub Copilot Fundamentals Virtual Training",
-      "issuer": "Cognizant",
-      "date": "JUL 2026",
-      "id": "CS-GHCF",
-      "link": "/certificates/github_copilot_fundamentals.pdf",
-      "icon": "🐙"
+      "title": "Getting Started with Data (Data Fundamentals)",
+      "issuer": "IBM SkillsBuild",
+      "date": "AUG 2026",
+      "id": "PLAN-14F2691E3A32",
+      "link": "https://skills.yourlearning.ibm.com/certificate/PLAN-14F2691E3A32",
+      "icon": "📈"
+    },
+    {
+      "title": "Generative AI for Decision Makers",
+      "issuer": "AWS",
+      "date": "JAN 2026",
+      "id": "MHMHDAWQJY",
+      "link": "https://drive.google.com/file/d/1KZHjC9anMhmh7OM8oNQ_YJv7tcCdspen/view?usp=sharing",
+      "icon": "🤖"
+    },
+    {
+      "title": "Building a Generative AI-Ready Organization",
+      "issuer": "AWS",
+      "date": "JAN 2026",
+      "id": "BYXUKTZR8P",
+      "link": "https://drive.google.com/file/d/1gn5Q4QC91x-h_bqu1dJOzly3hhjnZA7J/view?usp=sharing",
+      "icon": "🏢"
     },
     {
       "title": "Programming with Python",
@@ -681,22 +712,8 @@ export default function App() {
       "link": "/certificates/itpm_introduction_to_agile.pdf",
       "icon": "🔄"
     },
-    {
-      "title": "Generative AI for Decision Makers",
-      "issuer": "AWS",
-      "date": "JAN 2026",
-      "id": "MHMHDAWQJY",
-      "link": "https://drive.google.com/file/d/1KZHjC9anMhmh7OM8oNQ_YJv7tcCdspen/view?usp=sharing",
-      "icon": "🤖"
-    },
-    {
-      "title": "Building a Generative AI-Ready Organization",
-      "issuer": "AWS",
-      "date": "JAN 2026",
-      "id": "BYXUKTZR8P",
-      "link": "https://drive.google.com/file/d/1gn5Q4QC91x-h_bqu1dJOzly3hhjnZA7J/view?usp=sharing",
-      "icon": "🏢"
-    },
+
+    // ── TIER 5: FOUNDATIONAL AI & SPECIALIZED MODULES ──
     {
       "title": "Large Language Model Basics",
       "issuer": "IBM",
