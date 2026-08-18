@@ -1107,6 +1107,14 @@ export default function App() {
 
   const projects = [
     {
+      icon: "🧠",
+      title: "DataLens AI",
+      description: "Grounded intelligence & data science platform. Features automated EDA profiling, no-code AutoML, PII sanitization, resume talent scoring, and conversational Gemini analytics.",
+      tech: "React · TypeScript · Python · Gemini 3.7 & 2.5 · AutoML",
+      github: "https://github.com/SOUVIKSB1/DataLens-AI",
+      live: "https://datalensai.onrender.com/",
+    },
+    {
       icon: "🏥",
       title: "Clinic OS",
       description: "A comprehensive clinic management system with appointment booking, patient records, and real-time medical billing analytics.",
