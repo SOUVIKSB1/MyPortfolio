@@ -1111,7 +1111,7 @@ export default function App() {
       title: "DataLens AI",
       description: "Grounded intelligence & data science platform. Features automated EDA profiling, no-code AutoML, PII sanitization, resume talent scoring, and conversational Gemini analytics.",
       tech: "React · TypeScript · Python · Gemini 3.7 & 2.5 · AutoML",
-      github: "https://github.com/SOUVIKSB1/DataLens-AI",
+      github: "https://github.com/SOUVIKSB1/DataLensAI",
       live: "https://datalensai.onrender.com/",
     },
     {
