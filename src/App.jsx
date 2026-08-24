@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Mail, ExternalLink, Download, Menu, X, Briefcase, FolderOpen } from "lucide-react";
 import { FaGithub, FaLinkedin, FaEye, FaStar } from "react-icons/fa";
+import { SiCredly, SiGooglecloud } from "react-icons/si";
 import * as THREE from "three";
 import { motion, AnimatePresence } from "framer-motion";
 import StartAnimation from "./components/StartAnimation";
@@ -522,6 +523,14 @@ export default function App() {
   // Certifications list - Ordered strictly by Industry Prestige, Rigor & Market Value
   const certifications = [
     // ── TIER 1: FLAGSHIP GLOBAL CERTIFICATIONS & ACADEMIC INTERNSHIPS ──
+    {
+      "title": "Google Cloud Arcade Champion 2025 (Diamond League)",
+      "issuer": "Google Cloud Skills Boost",
+      "date": "2025",
+      "id": "GCP-ARCADE-2025",
+      "link": "/certificates/google_cloud_arcade_champion_2025.jpg",
+      "icon": "🏆"
+    },
     {
       "title": "Azure AI Fundamentals (AI-900) - Microsoft Certified",
       "issuer": "Microsoft",
@@ -1319,13 +1328,31 @@ export default function App() {
       tags: ["Cloud Native", "Leadership", "Innovation", "Problem Solving"]
     },
     {
-      title: "Google Cloud Arcade Champion",
-      organization: "Google Cloud Program",
-      date: "DEC 2024",
-      description: "Earned Champion tier by completing advanced hands-on labs on Kubernetes, cloud security, BigQuery analytics, and Vertex AI. Solved 140+ cloud skill badges and arcade game challenges.",
-      badge: "Cloud Champion",
+      title: "Google Cloud Arcade Champion 2025",
+      organization: "Google Cloud & Google Skills Program",
+      date: "2024 - 2025",
+      description: "Earned Arcade Champion 2025 and Diamond League (1,00,000+ Points). Completed 107+ Skill Badges, 400+ practiced hands-on labs (423 completed), 72+ courses, and 28 arcade games across Kubernetes, Vertex AI, BigQuery, and Cloud Security.",
+      badge: "Arcade Champion • Diamond League",
       icon: "☁️",
-      tags: ["GCP", "Kubernetes", "Cloud Security", "BigQuery"]
+      tags: ["Arcade Champion 2025", "Diamond League (100k+ Pts)", "107+ Badges", "400+ Labs", "Vertex AI", "GKE"],
+      links: [
+        { label: "Skills Profile 1", url: "https://www.skills.google/public_profiles/57ce5b2f-6df4-4cf5-83fc-f82528bb51fc" },
+        { label: "Skills Profile 2", url: "https://www.skills.google/public_profiles/16ea7d05-4436-4228-b43e-7f2bb2bfb07e" },
+        { label: "Champion Badge", url: "/certificates/google_cloud_arcade_champion_2025.jpg", isModal: true }
+      ]
+    },
+    {
+      title: "Credly Verified Digital Credentials",
+      organization: "Credly by Pearson",
+      date: "2024 - Present",
+      description: "Official transcript of authenticated professional badges and certificates from Microsoft, AWS Academy, IBM SkillsBuild, and DeepLearning.AI verified on Credly's enterprise platform.",
+      badge: "Verified Earner",
+      icon: "🎖️",
+      tags: ["Credly", "Microsoft", "AWS", "IBM", "DeepLearning.AI", "Digital Badges"],
+      links: [
+        { label: "Badges Transcript", url: "https://www.credly.com/users/souvik-sinhababu.ccd0d18c/badges/credly" },
+        { label: "Credly Profile", url: "https://www.credly.com/users/souvik-sinhababu" }
+      ]
     },
     {
       title: "DSA & Problem Solving",
@@ -1637,6 +1664,12 @@ export default function App() {
             </a>
             <a href="https://linkedin.com/in/souviksinhababu" target="_blank" rel="noreferrer" title="LinkedIn">
               <FaLinkedin size={18} />
+            </a>
+            <a href="https://www.credly.com/users/souvik-sinhababu" target="_blank" rel="noreferrer" title="Credly Verified Badges">
+              <SiCredly size={18} />
+            </a>
+            <a href="https://www.skills.google/public_profiles/57ce5b2f-6df4-4cf5-83fc-f82528bb51fc" target="_blank" rel="noreferrer" title="Google Cloud Skills Boost (Arcade Champion 2025)">
+              <SiGooglecloud size={18} />
             </a>
             <a href="mailto:souviksinhababu1@gmail.com" title="Email">
               <Mail size={18} />
@@ -2147,6 +2180,32 @@ export default function App() {
                   <span key={t} className="ach-tag">{t}</span>
                 ))}
               </div>
+              {ach.links && ach.links.length > 0 && (
+                <div className="ach-links-row">
+                  {ach.links.map((link) => (
+                    link.isModal ? (
+                      <button
+                        key={link.label}
+                        type="button"
+                        className="ach-link-btn"
+                        onClick={() => setViewingCert(link.url)}
+                      >
+                        {link.label} <ExternalLink size={12} />
+                      </button>
+                    ) : (
+                      <a
+                        key={link.label}
+                        href={link.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="ach-link-btn"
+                      >
+                        {link.label} <ExternalLink size={12} />
+                      </a>
+                    )
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -2162,10 +2221,94 @@ export default function App() {
           Professional <span className="gradient-text">Certifications</span>
         </h2>
 
+        {/* ── VERIFIED PROFILES & BADGES HUB ── */}
+        <div className="badges-hub-banner reveal-fade-up">
+          <div className="badges-hub-card google-skills-hub">
+            <div className="badges-hub-header">
+              <div className="badges-hub-icon google-cloud">
+                <SiGooglecloud size={24} />
+              </div>
+              <div className="badges-hub-meta">
+                <div className="badges-hub-tag">Google Cloud Skills Boost • APAC Member</div>
+                <h3 className="badges-hub-title">Google Skills Arcade Champion 2025</h3>
+              </div>
+              <span className="badges-hub-pill diamond">Diamond League • 100k+ Pts</span>
+            </div>
+            <p className="badges-hub-desc">
+              Earned Champion Tier with 107+ verified Skill Badges, 400+ practiced hands-on labs (423 completed), 72+ courses, and 28 arcade games across Kubernetes, Vertex AI &amp; Cloud Security.
+            </p>
+            <div className="badges-hub-actions">
+              <a
+                href="https://www.skills.google/public_profiles/57ce5b2f-6df4-4cf5-83fc-f82528bb51fc"
+                target="_blank"
+                rel="noreferrer"
+                className="hub-btn primary"
+              >
+                <span>Skills Profile 1 (Arcade)</span>
+                <ExternalLink size={12} />
+              </a>
+              <a
+                href="https://www.skills.google/public_profiles/16ea7d05-4436-4228-b43e-7f2bb2bfb07e"
+                target="_blank"
+                rel="noreferrer"
+                className="hub-btn secondary"
+              >
+                <span>Skills Profile 2 (Core)</span>
+                <ExternalLink size={12} />
+              </a>
+              <button
+                type="button"
+                onClick={() => setViewingCert("/certificates/google_cloud_arcade_champion_2025.jpg")}
+                className="hub-btn accent"
+              >
+                <span>View Champion Award</span>
+                <ExternalLink size={12} />
+              </button>
+            </div>
+          </div>
+
+          <div className="badges-hub-card credly-hub">
+            <div className="badges-hub-header">
+              <div className="badges-hub-icon credly">
+                <SiCredly size={24} />
+              </div>
+              <div className="badges-hub-meta">
+                <div className="badges-hub-tag">Credly by Pearson • Enterprise Transcripts</div>
+                <h3 className="badges-hub-title">Credly Verified Digital Credentials</h3>
+              </div>
+              <span className="badges-hub-pill verified">Officially Verified Earner</span>
+            </div>
+            <p className="badges-hub-desc">
+              Authenticated badge transcript across Microsoft Azure AI (AI-900), AWS Academy Data Engineering, IBM SkillsBuild AI Internship, and DeepLearning.AI benchmarks.
+            </p>
+            <div className="badges-hub-actions">
+              <a
+                href="https://www.credly.com/users/souvik-sinhababu.ccd0d18c/badges/credly"
+                target="_blank"
+                rel="noreferrer"
+                className="hub-btn primary"
+              >
+                <span>Badges Transcript</span>
+                <ExternalLink size={12} />
+              </a>
+              <a
+                href="https://www.credly.com/users/souvik-sinhababu"
+                target="_blank"
+                rel="noreferrer"
+                className="hub-btn secondary"
+              >
+                <span>Credly Public Profile</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+        </div>
+
         <motion.div layout className="cert-grid">
           <AnimatePresence mode="popLayout">
             {(certsExpanded ? certifications : certifications.slice(0, 7)).map((c, i) => {
               const isCollapsible = i >= 7;
+              const isLocalFile = c.link.includes(".pdf") || c.link.includes(".jpg") || c.link.includes(".png");
               return (
                 <motion.div
                   layout
@@ -2189,7 +2332,7 @@ export default function App() {
                     <p className="cert-issuer">{c.issuer}</p>
                     <div className="cert-footer">
                       <span className="cert-id">ID: {c.id}</span>
-                      {c.link.includes(".pdf") ? (
+                      {isLocalFile ? (
                         <button 
                           className="cert-link-btn" 
                           onClick={() => setViewingCert(c.link)}
@@ -2401,12 +2544,22 @@ export default function App() {
                 </button>
               </div>
               <div className="cert-modal-body">
-                <iframe
-                  src={`${viewingCert}#toolbar=0&navpanes=0`}
-                  title="Certificate PDF"
-                  width="100%"
-                  height="100%"
-                />
+                {viewingCert.endsWith(".jpg") || viewingCert.endsWith(".png") || viewingCert.endsWith(".jpeg") ? (
+                  <div className="cert-modal-img-wrap" style={{ textAlign: "center", maxHeight: "72vh", overflowY: "auto" }}>
+                    <img
+                      src={viewingCert}
+                      alt="Certificate / Award"
+                      style={{ maxWidth: "100%", maxHeight: "70vh", borderRadius: "10px", objectFit: "contain", border: "1px solid rgba(255,255,255,0.1)" }}
+                    />
+                  </div>
+                ) : (
+                  <iframe
+                    src={`${viewingCert}#toolbar=0&navpanes=0`}
+                    title="Certificate PDF"
+                    width="100%"
+                    height="100%"
+                  />
+                )}
               </div>
               <div className="cert-modal-footer">
                 <a
@@ -2415,7 +2568,7 @@ export default function App() {
                   className="btn-primary"
                   style={{ display: "inline-flex", alignItems: "center", gap: "8px", textDecoration: "none" }}
                 >
-                  <Download size={14} /> Download PDF
+                  <Download size={14} /> Download Credential
                 </a>
               </div>
             </motion.div>
