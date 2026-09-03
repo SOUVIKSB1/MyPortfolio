@@ -1124,6 +1124,14 @@ export default function App() {
       live: "https://datalensai.onrender.com/",
     },
     {
+      icon: "🗳️",
+      title: "DIGI-VOTER",
+      description: "A full-stack online voting and election management system featuring secure voter authentication, secret ballot casting, constitutional election scheduling, candidate nomination, and real-time voter turnout analytics with Docker containerization.",
+      tech: "JavaScript · Node.js · Express · Docker · HTML5 · CSS3",
+      github: "https://github.com/SOUVIKSB1/DIGI-VOTER",
+      live: "https://digi-voter.onrender.com/",
+    },
+    {
       icon: "🏥",
       title: "Clinic OS",
       description: "A comprehensive clinic management system with appointment booking, patient records, and real-time medical billing analytics.",
@@ -1132,20 +1140,20 @@ export default function App() {
       live: "https://clinic-os-gamma-one.vercel.app/",
     },
     {
-      icon: "💎",
-      title: "Swarnika",
-      description: "A full-stack e-commerce solution designed for premium retail experiences, offering secure management, dynamic product catalogs.",
-      tech: "HTML-CSS · Node.js · MongoDB · Firebase",
-      github: "https://github.com/SOUVIKSB1/Swarnika",
-      live: "https://swarnika-lemon.vercel.app/login"
-    },
-    {
       icon: "₹",
       title: "PayU₹upee",
       description: "A secure digital e-wallet system with hashed UPI PIN authentication, real-time transfers, scheduled payments, and category breakdowns.",
       tech: "HTML5 · CSS3 · JS · Node.js · MongoDB",
       github: "https://github.com/SOUVIKSB1/PayURupee",
       live: "https://pay-u-rupee.vercel.app"
+    },
+    {
+      icon: "💎",
+      title: "Swarnika",
+      description: "A full-stack e-commerce solution designed for premium retail experiences, offering secure management, dynamic product catalogs.",
+      tech: "HTML-CSS · Node.js · MongoDB · Firebase",
+      github: "https://github.com/SOUVIKSB1/Swarnika",
+      live: "https://swarnika-lemon.vercel.app/login"
     },
     {
       icon: "💰",
