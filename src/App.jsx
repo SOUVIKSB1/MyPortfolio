@@ -1125,9 +1125,9 @@ export default function App() {
     },
     {
       icon: "🗳️",
-      title: "DIGI-VOTER",
-      description: "A full-stack online voting and election management system featuring secure voter authentication, secret ballot casting, constitutional election scheduling, candidate nomination, and real-time voter turnout analytics with Docker containerization.",
-      tech: "JavaScript · Node.js · Express · Docker · HTML5 · CSS3",
+      title: "DIGI-VOTER 🇮🇳",
+      description: "Enterprise Online Voting & Election Management System (OVMS). Built with Firebase & JWT authentication, secret tamper-proof EVM balloting, anti-fraud double-voting prevention, 1-click WhatsApp poll sharing deep links with auto-scroll spotlighting, real-time voter turnout analytics, and a full-featured Chief Election Administrator panel with Docker containerization.",
+      tech: "Node.js · Express · MongoDB · Firebase Auth · Docker · REST API · ES6 Modules",
       github: "https://github.com/SOUVIKSB1/DIGI-VOTER",
       live: "https://digi-voter.onrender.com/",
     },
