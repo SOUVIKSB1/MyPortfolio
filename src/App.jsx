@@ -1164,22 +1164,6 @@ export default function App() {
       live: "https://eight-puzzle-1swc.onrender.com/",
     },
     {
-      icon: "⚙️",
-      title: "Computer Architecture Design",
-      description: "VHDL hardware description models implementing core ALU designs, memory registers, and instruction mapping simulation modules (PCC-CS-492).",
-      tech: "VHDL · CPU Design · Simulation",
-      github: "https://github.com/SOUVIKSB1/PCC-CS-492-ARCHITECTURE-",
-      live: "https://github.com/SOUVIKSB1/PCC-CS-492-ARCHITECTURE-",
-    },
-    {
-      icon: "🖥️",
-      title: "CBT-CIP Interface",
-      description: "A clean client interaction interface designed with structured protocols for validation testing and computer-based learning environments.",
-      tech: "JavaScript · HTML5 · CSS3",
-      github: "https://github.com/SOUVIKSB1/CBT-CIP",
-      live: "https://souviksb1.github.io/CBT-CIP",
-    },
-    {
       icon: "🫟",
       title: "Calculator Web V 3.0",
       description: "Futuristic modern calculator web app featuring theme change, converter, voice input, sound, & AI enabled.",
